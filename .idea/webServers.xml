@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="23e7fdd1-7055-43db-bf12-2886586c212e" name="aliyun" url="http://115.28.204.186">
+        <fileTransfer host="115.28.204.186" port="22" rootFolder="/home/hevlfreis/projects" accessType="SFTP" password="dfebdfd9dfd9dfdfdf98df92df98df9ddf9bdf99" username="root">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

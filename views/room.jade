@@ -1,0 +1,31 @@
+//
+   Created by hevlhayt@foxmail.com 
+   on 2016/8/24.
+
+extends basic
+
+block content
+  nav.navbar.navbar-default.navbar-fixed-top
+    .container
+      .row.box-message
+        .col-md-6.col-md-offset-3.text-center
+            .box-message-inner
+              textarea(name='message')
+              button#send= 'POST!'
+  .container.box-chat
+    .row
+      .col-md-8.col-md-offset-2.box-talks
+        .msg-system= '►► Kirito さんが入室しました'
+        .msg-default
+          .msg-user.text-center
+            .img-avatar.img-l
+            = 'L'
+          .msg-bubble.bubble-l.bounce= 'L this'
+        .msg-default
+          .msg-user.text-center
+            .img-avatar.img-miku
+            = 'Miku'
+          .msg-bubble.bubble-miku= '我的葱呢'
+
+
+

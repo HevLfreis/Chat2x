@@ -1,0 +1,181 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  width: 100%;
+  height: 100%;
+  margin-bottom: 60px;
+  background: #0a0a0a;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 60px;
+  background-color: #f5f5f5;
+}
+body > .container {
+  padding: 60px 15px 0;
+}
+.container .text-muted {
+  margin: 20px 0;
+}
+.footer > .container {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+code {
+  font-size: 80%;
+}
+
+.navbar {
+  background-color: #efefef;
+}
+
+.form-group {
+  margin: 5px;
+}
+
+.box-message {
+  padding: 5px 0 0 0;
+  color: #0a0a0a;
+}
+
+.box-message-inner {
+  /*width: 100%;*/
+  /*text-align: center;*/
+}
+
+.box-message-inner textarea {
+  width: 100%;
+  clear: both;
+  font-size: 16px;
+  letter-spacing: 1px;
+  padding: 10px;
+  border: 3px #5b5b5b solid;
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  overflow-y: hidden;
+  outline: none;
+}
+
+.box-message-inner button {
+  border: 0;
+  margin: 5px;
+  height: 25px;
+  width: 200px;
+  font-size: 12px;
+  font-family: "Meiryo", sans-serif;
+  color: #201e1a;
+  font-weight: bold;
+  background: transparent url('../images/submit.gif') 0 0 no-repeat;
+  outline: none;
+}
+
+.box-message-inner button:active {
+  background: transparent url('../images/submit.gif') 0 1px no-repeat;
+}
+
+.container.box-chat {
+  padding-top: 125px;
+  color: #ffffff;
+}
+
+.msg-system {
+  margin: 10px 0 10px 20px;
+  letter-spacing: 3px;
+  clear: left;
+}
+
+.msg-default {
+  min-height: 80px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.msg-user {
+  min-height: 20px;
+  width: 90px;
+  /*padding-top: 58px;*/
+  padding-bottom: 10px;
+  text-align: center;
+  display: inline-block;
+  line-height: 20px;
+  float: left;
+  font-weight: bold;
+}
+
+.img-avatar {
+  width: 58px;
+  height: 58px;
+  border: 3px solid #fff;
+  margin: auto;
+}
+
+.msg-bubble {
+  max-width: 600px;
+  display: inline-block;
+  word-break: break-all;
+  padding: 15px 20px;
+  border-radius: 13px;
+  border: 4px #fff solid;
+  -moz-border-radius: 13px;
+  -webkit-border-radius: 13px;
+  background: #000;
+  font: 1em "Meiryo", sans-serif;
+  letter-spacing: 3px;
+  color: white;
+}
+
+@media (max-width: 480px) {
+  .msg-bubble {
+    max-width: 70%;
+  }
+}
+
+.img-setton {
+  background: transparent url('../images/icon_setton.png') no-repeat center top;
+}
+
+.bubble-setton {
+  background: transparent url('../images/gray.png') repeat-x left center;
+}
+
+.img-l {
+  background: transparent url('../images/avatars/l.png') no-repeat center top;
+  background-size: 58px 58px;
+}
+
+.bubble-l {
+  background: linear-gradient(to bottom, #515151 50%, #1c1c1c 50%)
+}
+
+.img-miku {
+  background: transparent url('../images/avatars/miku.png') no-repeat center top;
+  background-size: 58px 58px;
+}
+
+.bubble-miku {
+  background: linear-gradient(to bottom, #4fcc91 50%, #4baf76 50%)
+}
+
+.bounce {
+  animation: bounce .2s linear 1;
+  transform-origin: 20px 30px;
+}
+
+@keyframes bounce {
+  0%,
+  1%{
+    transform: scale(.2);
+  }
+  50%{
+    transform: scale(1.05);
+  }
+  100%{
+    transform: scale(1);
+  }
+
+}
