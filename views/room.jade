@@ -10,22 +10,27 @@ block content
       .row.box-message
         .col-md-6.col-md-offset-3.text-center
             .box-message-inner
-              textarea(name='message')
-              button#send= 'POST!'
+              textarea(v-model='message', v-on:keydown.enter.prevent='send')
+              //| <button v-on:click="send">POST!</div>
+              button(v-on:click="send")= 'POST!'
+
   .container.box-chat
     .row
       .col-md-8.col-md-offset-2.box-talks
-        .msg-system= '►► Kirito さんが入室しました'
-        .msg-default
-          .msg-user.text-center
-            .img-avatar.img-l
-            = 'L'
-          .msg-bubble.bubble-l.bounce= 'L this'
-        .msg-default
-          .msg-user.text-center
-            .img-avatar.img-miku
-            = 'Miku'
-          .msg-bubble.bubble-miku= '我的葱呢'
+        template(v-for='item in items')
+          template(v-if=' item.t.indexOf("sys") != -1 ')
+            template(v-if=' item.t === "sysin" ')
+              .msg-system= '►► {{ item.name }} さんが入室しました'
+            template(v-else)
+              .msg-system= '►► {{ item.name }} さんが退室しました'
+          template(v-else)
+            .msg-default
+              .msg-user.text-center
+                .img-avatar(v-bind:style="{ background: item.avatar, backgroundSize: '58px 58px' }")
+                = '{{ item.name }}'
+              .msg-bubble.bounce(v-bind:style="{ \
+                  background: item.background \
+                }")= '{{ item.msg }}'
 
 
 
