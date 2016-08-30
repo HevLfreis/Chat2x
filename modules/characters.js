@@ -7,21 +7,18 @@ var fs = require('fs');
 var async = require("async");
 var Jimp = require("jimp");
 var ColorThief = require('color-thief-jimp');
+var assert = require('assert');
 
-
-var AVT_DIR = 'public/images/avatars/';
+var dir = 'public/images/avatars/';
 var characters = JSON.parse(fs.readFileSync('public/json/character.json', 'utf8'));
 
-//console.log(characters["l"])
-
-async.each(Object.keys(characters), function(chara, callback) {
-    Jimp.read(AVT_DIR+chara+'.png').then(function(image) {
-        var dominantColor = ColorThief.getColor(image);
-        characters[chara]["color"] = dominantColor;
+async.each(Object.keys(characters), function(cid, callback) {
+    Jimp.read(dir+cid+'.png').then(function(image) {
+        characters[cid]["color"] = ColorThief.getColor(image);
         callback();
     }).catch(function (err) {
-        console.error('Init character failed:' + chara);
-        characters[chara] = null;
+        console.error('Init character failed:' + cid);
+        characters[cid] = null;
     });
 }, function(err) {
     if( err ) {
@@ -30,7 +27,5 @@ async.each(Object.keys(characters), function(chara, callback) {
         console.log('All characters have been inited successfully');
     }
 });
-
-
 
 module.exports = characters;

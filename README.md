@@ -1,5 +1,5 @@
 # Chat2x
-Drrr like chat room
+Drrr like chatroom with anime characters  
 Idea from http://www.bilibili.com/video/av5700746/
 ***
 waiting...

@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var hello = require('../init.js');
+var hello = require('../modules/characters.js');
 h = hello;
 
 /* GET home page. */
@@ -9,6 +9,8 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/history', function (req, res, next) {
+
+    // Todo: not all character
     res.send(h);
 });
 
