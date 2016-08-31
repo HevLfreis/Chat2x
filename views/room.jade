@@ -26,10 +26,10 @@ block content
           template(v-else)
             .msg-default
               .msg-user.text-center
-                .img-avatar(v-bind:style="{ background: item.avatar, backgroundSize: '58px 58px' }")
+                .img-avatar(v-bind:style="{ background: item.avatar, backgroundSize: '55px 55px' }")
                 = '{{ item.name }}'
               .msg-bubble.bounce(v-bind:style="{ \
-                  background: item.background \
+                  background: item.background, color: item.color \
                 }")= '{{ item.msg }}'
 
 

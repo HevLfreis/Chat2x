@@ -17,22 +17,31 @@ socket.on('chat', function(msg){
                 msg: msg.msg,
                 background: 'linear-gradient(to bottom, '+colorIndex[msg.cid][1]+' 50%, '+colorIndex[msg.cid][0]+' 50%)',
                 avatar: "transparent url('../images/avatars/"+msg.cid+".png') no-repeat center top",
+                color: colorIndex[msg.cid][2],
                 t: ''});
     else
         chat.items.unshift(msg);
 });
 
 socket.on('info', function(infos){
-    console.log(infos);
+    //console.log(infos);
     $.each(infos, function(i, info) {
         if (!(info in colorIndex)) {
-            var color1 = 'rgb(' + info.color.toString() + ')';
-            var color2 = 'rgb(' + colorLighter(info.color, 30).toString() + ')';
+            var color = info.color;
+            var color1 = 'rgb(' + color.toString() + ')';
+            var color2 = 'rgb(' + colorLighter(color, 30).toString() + ')';
             colorIndex[info.cid] = [color1, color2];
+            var luma = 0.2126 * color[0] + 0.7152 * color[1] + 0.0722 * color[2];
+            //console.log(luma);
+            if (luma > 200)
+                colorIndex[info.cid].push('#2f2f2f');
+            else
+                colorIndex[info.cid].push('#fff');
+
         }
     });
 
-    console.log(colorIndex);
+    //console.log(colorIndex);
 });
 
 var message = new Vue({

@@ -10,8 +10,9 @@ var ColorThief = require('color-thief-jimp');
 var assert = require('assert');
 
 var dir = 'public/images/avatars/';
-var characters = JSON.parse(fs.readFileSync('public/json/character.json', 'utf8'));
+var characters = JSON.parse(fs.readFileSync('public/data/character.json', 'utf8'));
 
+// Todo: callback hell
 async.each(Object.keys(characters), function(cid, callback) {
     Jimp.read(dir+cid+'.png').then(function(image) {
         characters[cid]["color"] = ColorThief.getColor(image);
@@ -29,3 +30,4 @@ async.each(Object.keys(characters), function(cid, callback) {
 });
 
 module.exports = characters;
+

@@ -5,26 +5,14 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var db = require('./modules/backend').db;
-var MongoStore = require('./modules/backend').MongoStore;
-var session = require('./modules/backend').session;
+var session = require('./modules/backend');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
 
-
-app.use(session({
-    secret: 'lCkCtc1mG1262E72hf7bJfFZOl9659qc',
-    store: new MongoStore({ mongooseConnection: db }),
-    cookie: {
-        maxAge: 5 * 60 * 1000
-    },
-
-    // Todo: ???
-    ttl: 7 * 24 * 60 * 60
-}));
+app.use(session);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

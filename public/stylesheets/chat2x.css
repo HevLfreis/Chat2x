@@ -125,6 +125,7 @@ code {
   -webkit-border-radius: 13px;
   background: #000;
   font: 1em "Meiryo", sans-serif;
+  font-weight: bold;
   letter-spacing: 3px;
   color: white;
 }

@@ -1,7 +1,11 @@
 {
   "admin": {
-    "name": "Admin",
-    "remark": "hhh"
+    "name": "Kami",
+    "remark": "我就是新世界の神"
+  },
+  "a": {
+    "name": "友人A",
+    "remark": "..."
   },
   "l": {
     "name": "L",
@@ -22,5 +26,17 @@
   "index": {
     "name": "Index",
     "remark": "当嘛，我肚子饿了o(≧口≦)o"
+  },
+  "rem": {
+    "name": "Rem",
+    "remark": "486, RemのHero"
+  },
+  "hakase": {
+    "name": "Hakase",
+    "remark": "SA ME! SA ME!"
+  },
+  "sakamoto": {
+    "name": "坂本先生",
+    "remark": "要叫我先生。哎这个好好玩啊"
   }
 }

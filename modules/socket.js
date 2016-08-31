@@ -4,6 +4,7 @@
  * Time: 10:22
  */
 var socket = require('socket.io');
+var session = require('./backend');
 var _ = require('underscore');
 var characters = require('../modules/characters.js');
 
@@ -13,29 +14,45 @@ module.exports = Socket;
 
 function Socket(srv) {
     var io = socket(srv);
-    var members = {};
-    _.each(Object.keys(characters), function(cid) {
-        members[cid] = false;
+
+    io.use(function(socket, next) {
+        session(socket.request, socket.request.res, next);
     });
 
+    var online = {};
+
     io.on('connection', function(socket){
+        var sid = socket.request.session.id;
+        console.log('socket: ', sid);
 
         var room = 'default room';
         socket.join(room);
 
-        var info = _.map(members, function(v, cid) {
+        var info = _.map(online, function(cid, sid) {
             return { cid: cid, color: characters[cid]['color']}
         });
 
         socket.emit('info', info);
 
-        var cid = _.sample(Object.keys(characters), 1)[0];
-        var cname = characters[cid]['name'];
-        members[cid] = true;
+        var cid = 'a', cname = 'Friend A';
+        if (sid in online) {
+            cid = online[sid];
+        }
+        else {
+            // Todo: no cid to use
+            scid = _.sample(_.reject(Object.keys(characters), function(k) {
+                return _.contains(online, k)
+            }), 1)[0];
 
+            if (scid !== undefined) cid = scid;
+        }
+
+        cname = characters[cid]['name'];
+        //online.push(cid);
+        online[socket.request.session.id] = cid;
         io.to(room).emit('chat', { name: cname, t: 'sysin'});
         io.to(room).emit('info', [{ cid: cid, color: characters[cid]['color']}]);
-        console.log('a user connected', socket.id);
+        console.log(online);
 
         socket.on('chat', function(msg){
             console.log(cname, msg);
@@ -45,7 +62,7 @@ function Socket(srv) {
 
         socket.on('disconnect', function(){
             console.log('user disconnected');
-            members[cid] = false;
+            delete online[socket.request.session.id];
             io.to(room).emit('chat', { name: cname, t: 'sysout'});
 
         });

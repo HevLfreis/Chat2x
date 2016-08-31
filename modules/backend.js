@@ -19,9 +19,17 @@ db.once('open', function() {
     console.log('Connected to mongodb')
 });
 
+var sessionMiddleware = session({
+    secret: 'bdvstUP53hS110xN7DW8FE4NS2NdAw7X',
+    store: new MongoStore({ mongooseConnection: db }),
+    cookie: {
+        maxAge: 5 * 60 * 1000
+    },
+    resave: false,
+    saveUninitialized: false,
+    // Todo: ???
+    ttl: 7 * 24 * 60 * 60
+});
+
 //module.exports = [db, MongoStore(), session];
-module.exports = {
-    db: db,
-    MongoStore: MongoStore,
-    session: session
-};
+module.exports = sessionMiddleware;

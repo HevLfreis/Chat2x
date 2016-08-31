@@ -1,17 +1,13 @@
 var express = require('express');
 var router = express.Router();
-var hello = require('../modules/characters.js');
-h = hello;
+var logger = require('../modules/logger');
+var util = require('../modules/util');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+    logger.info(util.formatter('access', req));
     res.render('room', { title: 'Chat2x' });
-});
-
-router.get('/history', function (req, res, next) {
-
-    // Todo: not all character
-    res.send(h);
+    console.log(req.session.id);
 });
 
 router.get('/2', function(req, res, next) {
