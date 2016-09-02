@@ -6,7 +6,8 @@
 var _ = require('underscore');
 
 function reqLogFormatter(act, req) {
-    return act.toUpperCase()+' (' + _.last(req.ip.split(':')) + ')' + req.sessionID;
+    var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    return act.toUpperCase()+' (' + _.last(ip.split(':')) + ')' + req.sessionID;
 }
 
 module.exports = {formatter: reqLogFormatter};

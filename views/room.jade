@@ -31,6 +31,16 @@ block content
               .msg-bubble.bounce(v-bind:style="{ \
                   background: item.background, color: item.color \
                 }")= '{{ item.msg }}'
+block script
+  script(src='/javascripts/jquery.min.js')
+  script(src='/javascripts/bootstrap.min.js')
+  script(src='/javascripts/vue.js')
+  //script(src='/plugins/rollbar/js/jquery.easing.1.3.js')
+  //script(src='/plugins/rollbar/js/jquery.mousewheel.js')
+  //script(src='/plugins/rollbar/js/jquery.rollbar.min.js')
+  script(src='/javascripts/socket.io-1.4.5.js')
+  script(src='/javascripts/chat2x.js')
+  //script(src='/javascripts/rollbar.js')
 
 
 

@@ -1,20 +1,29 @@
-# Chat2x
+# <img src="public/images/logo2.png" width="25"> Chat2x
+<img src="public/images/logo.jpg" width="50%">
+
 Drrr like chatroom with anime characters  
-Idea from http://www.bilibili.com/video/av5700746/
+Idea from: http://www.bilibili.com/video/av5700746/  
+Location: http://drrr.seeleit.com/
 ***
 ## Characters
 | **作品** | **人物** |
 | --- | --- |
 | EVA | 绫波丽，碇真嗣，渚薰 |
+| Fate | Saber，土狼，远坂凛，金闪闪 |
+| KON | 唯，梓喵 |
+| Love Live | 南小鸟，矢泽妮可 |
+| Re:0 | 蕾姆，486，EMT |
+| School Days | 诚哥 |
 | 海贼王 | 路飞，乔巴，女帝 |
 | 火影忍者 | 鸣人，佐助，卡卡西，小樱 |
 | 四月是你的谎言 | 公生，熏，友人A |
 | 叛逆的鲁路修 | 鲁路修，C.C. |
 | 高达Seed | 基神，阿斯兰，拉克丝 |
 | 高达OO | 刹那，洛克昂 |
-| Fate | Saber，土狼，远坂凛，金闪闪 |
 | 日常 | 博士，阪本先生 |
 | 死亡笔记 | L，月 |
+| 命运石之门 | 冈部伦太郎，助手，嘟嘟噜 |
+| 灼眼的夏娜 | 夏娜 |
 | 魔法少女小圆 | 小圆，qb，焰 |
 | 魔卡少女樱 | 樱 |
 | 魔法禁书目录 | 当嘛，Index，御坂美琴 |
@@ -22,11 +31,7 @@ Idea from http://www.bilibili.com/video/av5700746/
 | 罪恶王冠 | 祈，集 |
 | 俺妹 |  |
 | 钢之炼金术师 | 爱德华 |
-| 命运石之门 | 凤凰院凶真，助手，嘟嘟噜 |
-| 灼眼的夏娜 | 夏娜 |
 | 冰菓 | 折木奉太郎，千反田爱瑠 |
-| KON | 唯，梓喵 |
-| School Days | 诚哥 |
 | 缘之空 | 穹妹 |
 | 凉宫春日的忧郁 | 团长，阿虚，长门有希 |
 | 刀剑神域 | 亚丝娜，桐人 |
@@ -34,13 +39,13 @@ Idea from http://www.bilibili.com/video/av5700746/
 | 进击的巨人 | 利威尔·阿克曼 |
 | 无头骑士异闻录 | 折原临也 |
 | 名侦探柯南 | 柯南，哀，兰 |
-| Re:0 | 蕾姆，486，EMT |
 | 食戟之灵 | 药王 |
 | 中华小当家 | 刘昂星 |
 | 在下坂本有何贵干 | 坂本 |
 | 暗杀教室 | 杀老师 |
 | 逆转裁判 | 成步堂 |
 | 幸运星 | 泉此方 |
+| 其他 | 初音，洛天依 |
 
 waiting...
 

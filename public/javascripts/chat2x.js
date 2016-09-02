@@ -63,29 +63,9 @@ var message = new Vue({
 var chat = new Vue({
     el: '.box-talks',
     data: {
-        items: [
-            //{ name: 'Kirito', t: 'sysin'},
-            //{ name: 'Hi', msg: '???...' },
-            //{ name: 'Light', msg: '...' },
-            //{ name: 'Yagami', t: 'sysout'},
-        ],
+        items: []
     }
 });
-
-//$.get('/history', function(data) {
-//
-//    $.each(Object.keys(data), function(i, h) {
-//        var msg = data[h];
-//        var color1 = 'rgb(' + msg.color.toString() + ')';
-//        var color2 = 'rgb(' + colorLighter(msg.color, 30).toString() + ')';
-//        chat.items.push( { name: msg.name,
-//            msg: msg.remark,
-//            background: 'linear-gradient(to bottom, '+color2+' 50%, '+color1+' 50%)',
-//            avatar: "transparent url('../images/avatars/"+h+".png') no-repeat center top",
-//            t: ''})
-//    });
-//
-//});
 
 
 var colorLighter = function(rgb, percent) {

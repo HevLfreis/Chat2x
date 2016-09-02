@@ -1,0 +1,36 @@
+//
+   Created by hevlhayt@foxmail.com 
+   on 2016/8/24.
+
+extends basic
+
+block content
+  nav.navbar.navbar-default.navbar-fixed-top
+    .container
+      .row.box-message
+        .col-md-6.col-md-offset-3.text-center
+            .box-message-inner
+              textarea(v-model='message', v-on:keydown.enter.prevent='send')
+              //| <button v-on:click="send">POST!</div>
+              button(v-on:click="send")= 'POST!'
+
+  .container.box-chat
+    .row
+      .col-md-8.col-md-offset-2.box-talks
+        template(v-for='item in items')
+          .msg-default
+            .msg-user.text-center
+              .img-avatar(v-bind:style="{ background: item.avatar, backgroundSize: '55px 55px' }")
+              = '{{ item.name }}'
+            .msg-bubble.bounce(v-bind:style="{ \
+                background: item.background \
+              }")= '{{ item.msg }}'
+
+block script
+  script(src='/javascripts/jquery.min.js')
+  script(src='/javascripts/bootstrap.min.js')
+  script(src='/javascripts/vue.js')
+  script(src='/javascripts/bingo.js')
+
+
+

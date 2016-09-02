@@ -5,14 +5,14 @@
  */
 var mongoose = require('mongoose');
 
-var historySchema = mongoose.Schema({
+var msgSchema = mongoose.Schema({
     sid: String,
-    chara: String,
-    room: Number,
+    cid: String,
+    room: String,
     msg: String,
     time: Date
 });
 
-var History = mongoose.model('History', historySchema);
+var Message = mongoose.model('Messages', msgSchema);
 
-module.exports = History;
+module.exports = Message;

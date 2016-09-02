@@ -23,13 +23,13 @@ var sessionMiddleware = session({
     secret: 'bdvstUP53hS110xN7DW8FE4NS2NdAw7X',
     store: new MongoStore({ mongooseConnection: db }),
     cookie: {
-        maxAge: 5 * 60 * 1000
+        //maxAge: 5 * 60 * 1000
+        maxAge: 30 * 1000
     },
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: true,
     // Todo: ???
     ttl: 7 * 24 * 60 * 60
 });
 
-//module.exports = [db, MongoStore(), session];
 module.exports = sessionMiddleware;

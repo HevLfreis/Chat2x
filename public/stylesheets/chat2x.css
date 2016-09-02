@@ -95,6 +95,7 @@ code {
   margin-bottom: 20px;
 }
 
+/* Todo: 700px msg \n fix !*/
 .msg-user {
   min-height: 20px;
   width: 90px;
@@ -117,7 +118,7 @@ code {
 .msg-bubble {
   max-width: 600px;
   display: inline-block;
-  word-break: break-all;
+  /*word-break: break-all;*/
   padding: 15px 20px;
   border-radius: 13px;
   border: 4px #fff solid;

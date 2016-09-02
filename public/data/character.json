@@ -1,7 +1,7 @@
 {
   "admin": {
     "name": "Kami",
-    "remark": "我就是新世界の神"
+    "remark": "我也是新世界の神"
   },
   "a": {
     "name": "友人A",
@@ -11,32 +11,67 @@
     "name": "L",
     "remark": "Kira，我是L"
   },
+  "light": {
+    "name": "夜神月",
+    "remark": "我就是新世界の神"
+  },
   "miku": {
-    "name": "Miku",
-    "remark": "Miku Miku Dance ~"
+    "name": "初音未来",
+    "remark": "♪♪♪",
+    "color": [0, 167, 178]
   },
   "luffy": {
-    "name": "Luffy",
+    "name": "路飞",
     "remark": "我是要成为海贼王的男人 ！！！"
   },
   "edward": {
-    "name": "Edward",
+    "name": "爱德华",
     "remark": "你说谁是豆丁啊？！！！&%$##"
+  },
+  "touma": {
+    "name": "上条当麻",
+    "remark": "不幸だ!"
+  },
+  "misaka": {
+    "name": "御坂美琴",
+    "remark": "不要喊我哔哩哔哩(╬▔皿▔)"
   },
   "index": {
     "name": "Index",
     "remark": "当嘛，我肚子饿了o(≧口≦)o"
   },
   "rem": {
-    "name": "Rem",
-    "remark": "486, RemのHero"
+    "name": "蕾姆",
+    "remark": "486, RemのHero",
+    "color": [141, 192, 253]
   },
   "hakase": {
-    "name": "Hakase",
+    "name": "博士",
     "remark": "SA ME! SA ME!"
   },
   "sakamoto": {
     "name": "坂本先生",
     "remark": "要叫我先生。哎这个好好玩啊"
+  },
+  "saber": {
+    "name": "Saber",
+    "remark": "你是我的master吗"
+  },
+  "lin": {
+    "name": "远坂凛",
+    "remark": "Archer，到我房间来"
+  },
+  "kaori": {
+    "name": "宫园薰",
+    "remark": "我任命友人A做我的伴奏者"
+  },
+  "kousei": {
+    "name": "有马公生",
+    "remark": "春天马上就要来了，让我和你相遇的春天，就要来了，再也没有你的春天，就要来了♪",
+    "color": [43, 43, 43]
+  },
+  "konata": {
+    "name": "泉此方",
+    "remark": "贫乳就是正义"
   }
 }
