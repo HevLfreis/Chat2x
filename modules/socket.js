@@ -11,11 +11,13 @@ var Message = require('./models');
 var cookie = require('cookie');
 var logger = require('./logger');
 var util = require('./util');
-var characters = require('../modules/characters.js');
+var characters = require('./characters.js');
 
 module.exports = Socket;
 
 // Todo: Socket.IO Authentication, sessionid
+// Todo: multiple same page, disconnect one , others ?
+// Todo: date.now and new date()
 function Socket(srv) {
     var io = socket(srv);
 
@@ -24,8 +26,9 @@ function Socket(srv) {
         session(socket.request, socket.request.res, next);
     });
 
-    // online list { sessionid: [characterid, expires]... }
-    const online = {};
+    // online: online list { sessionid: [characterid, expires]... }
+    // socket2session: fix the multiple page of same session
+    const online = {}, socket2session = {};
     cleanDeadSession(online);
 
     io.on('connection', function(socket) {
@@ -34,7 +37,24 @@ function Socket(srv) {
             sess = req.session,
             store = req.sessionStore,
             sid = sess.id,
-            cookies = cookie.parse(socket.handshake.headers['cookie']);
+            admin = false,
+            cookies = cookie.parse(socket.handshake.headers['cookie']),
+            skid = socket.id.slice(2);
+
+        if (socket.handshake.query.pass === "12345678") {
+            admin = true;
+        }
+
+        console.log(admin);
+
+        if (sid in socket2session) {
+            if (!_.contains(socket2session[sid], skid)) {
+                socket2session[sid].push(skid);
+            }
+        }
+        else {
+            socket2session[sid] = [skid];
+        }
 
         // join to the default room
         var room = 'default room';
@@ -50,7 +70,11 @@ function Socket(srv) {
         // if there's no cid to use, use 'a'(Friend A)
         // if session/cookie existed, keep the cid to forbid refreshing for a new one
         var cid = 'a';
-        if (sid in online) {
+        if (admin) {
+            cid = 'admin';
+            logger.info(formatter('admin', req, cid));
+        }
+        else if (sid in online) {
             cid = online[sid][0];
             logger.info(formatter('reconnect', req, cid));
         }
@@ -105,7 +129,8 @@ function Socket(srv) {
         socket.on('disconnect', function() {
             // if the connection doesn't contains cookie
             // meaning the client connect to room without a http request
-            //
+            // or the cookie expired
+
             if ('connect.sid' in cookies) {
                 var expires = sess.cookie._expires;
                 //console.log(new Date(), expires);
@@ -115,6 +140,8 @@ function Socket(srv) {
                     io.to(room).emit('chat', { name: cname, t: 'sysout'});
                 }
                 else {
+                    // if the cookie not expired, we keep the sid for
+                    // client to avoid refreshing for a new cid
                     online[sid] = [cid, expires];
                     logger.info(formatter('keepalive', req, cid));
                 }
@@ -125,7 +152,13 @@ function Socket(srv) {
                 io.to(room).emit('chat', { name: cname, t: 'sysout'});
             }
 
-            io.to(room).emit('chat', { name: cname, t: 'sysout'});
+            // when a session is disconnect
+            // we should disable all the sockets which share
+            // the sessionid.
+            io.to(room).emit('offline', socket2session[sid]);
+            delete socket2session[sid];
+
+            //io.to(room).emit('chat', { name: cname, t: 'sysout'});
 
         });
     });
@@ -148,5 +181,5 @@ function cleanDeadSession(online) {
         });
 
         console.log(online);
-    }, 5000)
+    }, 1000 * 30)
 }

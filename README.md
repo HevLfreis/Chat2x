@@ -1,11 +1,20 @@
 # <img src="public/images/logo2.png" width="25"> Chat2x
-<img src="public/images/logo.jpg" width="50%">
+<img src="public/images/logo.png" width="50%">
 
-Drrr like chatroom with anime characters  
-Idea from: http://www.bilibili.com/video/av5700746/  
-Location: http://drrr.seeleit.com/
+打破次元壁的无头骑士聊天室  
+创意：http://www.bilibili.com/video/av5700746/  
+网址：http://drrr.seeleit.com/
+
 ***
-## Characters
+
+## 特点
+* 移植自 https://code.google.com/archive/p/drrr-like-chat/
+* 前端 bootstrap+vue.js 重写
+* 后端 nodejs+express+sockit.io+winston+mongodb 重写
+* 进入聊天室随机分配角色，聊天角色可配置
+* 根据头像自动生成聊天气泡颜色
+
+## 参加角色（完成30/N）
 | **作品** | **人物** |
 | --- | --- |
 | EVA | 绫波丽，碇真嗣，渚薰 |
@@ -46,8 +55,32 @@ Location: http://drrr.seeleit.com/
 | 逆转裁判 | 成步堂 |
 | 幸运星 | 泉此方 |
 | 其他 | 初音，洛天依 |
+| ... | ... |
 
-waiting...
+***
+
+# <img src="public/images/logo2.png" width="25"> Chat2x
+
+Drrr like chatroom with anime characters  
+Idea from: http://www.bilibili.com/video/av5700746/  
+Location: http://drrr.seeleit.com/
+
+***
+
+## Feature
+* Migrate from https://code.google.com/archive/p/drrr-like-chat/
+* Rewrite front-end by bootstrap+vue.js 
+* Rewrite back-end by nodejs+express+sockit.io+winston+mongodb
+* Random character when entering the chatroom, configurable character list
+* Auto-generated message bubble color from character avatar
+
+## How to use
+1. Install nodejs, npm and mongodb
+2. At root directory, `npm isntall`, then `node bin/www`
+3. Server set up at http://127.0.0.1:3000/
+
+## License
+MIT
 
 > If you have any problem, please contact hevlhayt@foxmail.com (ﾉﾟ▽ﾟ)ﾉ
 

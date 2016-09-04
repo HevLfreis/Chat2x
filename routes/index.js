@@ -6,14 +6,16 @@ var util = require('../modules/util');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-
     logger.info(util.formatter('access', req));
     res.render('room', { title: 'Chat2x' });
-    console.log(req.session.id);
 });
 
 router.get('/bingo', function(req, res, next) {
     res.render('bingo', { title: 'Chat2x' });
+});
+
+router.get('/admin', function(req, res, next) {
+    res.render('room', { title: 'Chat2x', admin: true });
 });
 
 router.get('/list', function(req, res, next) {

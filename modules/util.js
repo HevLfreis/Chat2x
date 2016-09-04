@@ -10,4 +10,9 @@ function reqLogFormatter(act, req) {
     return act.toUpperCase()+' (' + _.last(ip.split(':')) + ')' + req.sessionID;
 }
 
+//var TrieFilter = {
+//    key: '',
+//    dict: TrieFilter
+//};
+
 module.exports = {formatter: reqLogFormatter};

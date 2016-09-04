@@ -4,9 +4,17 @@
  * Time: 17:29
  */
 
-var colorIndex = [];
+var socket;
+if (admin!==undefined&&admin) {
+    var pass = prompt("Pass");
+    socket = io(window.location.origin, { query: "pass="+pass });
+}
+else {
+    socket = io();
+}
 
-var socket = io();
+// bubble color info from server
+var colorIndex = [];
 
 socket.on('chat', function(msg){
     //console.log(msg);
@@ -27,10 +35,12 @@ socket.on('info', function(infos){
     //console.log(infos);
     $.each(infos, function(i, info) {
         if (!(info in colorIndex)) {
-            var color = info.color;
-            var color1 = 'rgb(' + color.toString() + ')';
-            var color2 = 'rgb(' + colorLighter(color, 30).toString() + ')';
+            var color = info.color,
+                color1 = 'rgb(' + color.toString() + ')',
+                color2 = 'rgb(' + colorLighter(color, 30).toString() + ')';
+
             colorIndex[info.cid] = [color1, color2];
+
             var luma = 0.2126 * color[0] + 0.7152 * color[1] + 0.0722 * color[2];
             //console.log(luma);
             if (luma > 200)
@@ -42,6 +52,12 @@ socket.on('info', function(infos){
     });
 
     //console.log(colorIndex);
+});
+
+socket.on('offline', function(off){
+    if (off.indexOf(socket.id) != -1) {
+        socket.disconnect();
+    }
 });
 
 var message = new Vue({
