@@ -3,7 +3,9 @@
  * Date: 2016/8/25
  * Time: 17:29
  */
-var regex = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/;
+var urlRegex = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/;
+var wordRegex = /(link)|(pan)|(share)|(傻逼)|(你妈)/;
+
 var socket;
 if (admin !== undefined && admin) {
     var pass = prompt("Pass");
@@ -74,7 +76,7 @@ var message = new Vue({
             //console.log(chat.items);
             var m = this.message;
 
-            if (regex.test(m)) {
+            if (urlRegex.test(m) || wordRegex.test(m)) {
                 this.message = '';
                 alert('停车！！！');
                 return;
@@ -107,6 +109,14 @@ var chat = new Vue({
         items: []
     }
 });
+
+// dom collecter
+setInterval(function() {
+    if (chat.items.length > 250) {
+        $('body').animate({ scrollTop: 0 }, 200);
+        chat.items = chat.items.slice(0, 50);
+    }
+}, 60 * 1000);
 
 var colorLighter = function(rgb, percent) {
     return [parseInt(rgb[0] + (256 - rgb[0]) * percent / 100),

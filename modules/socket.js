@@ -47,6 +47,7 @@ function Socket(srv) {
 
         // disable ip in blacklist
         if (_.contains(blacklist, ipaddr)) {
+            console.log("ban")
             socket.disconnect();
             return;
         }
@@ -103,7 +104,7 @@ function Socket(srv) {
             // reject cid already online, exclude admin
             var scid = _.sample(_.reject(Object.keys(characters), function(k) {
                 //if (_.contains(onlineIndex, k)) console.log('have: ',k);
-                if (k == 'admin') return false;
+                if (k == 'admin') return true;
                 else return _.contains(onlineIndex, k);
 
             }), 1)[0];
@@ -119,7 +120,7 @@ function Socket(srv) {
             io.to(room).emit('chat', { name: cname, t: 'sysin'});
         }
         io.to(room).emit('info', [{ cid: cid, color: characters[cid]['color']}]);
-        online[sid] = [cid, null, null];
+        online[sid] = [cid, null, ipaddr];
 
         socket.on('chat', function(msg){
 
@@ -128,7 +129,10 @@ function Socket(srv) {
                 msg = characters[cid]['remark'];
             }
             else if (admin && msg.lastIndexOf('ban:$', 0) === 0) {
-                //console.log('adminban');
+                var bcid = msg.slice(5);
+                blacklist.push(bcid);
+
+                console.log(blacklist, bcid2ip(online, bcid));
             }
             else {
 
@@ -203,7 +207,15 @@ function cleanDeadSession(online) {
                 }
             }
         });
-
+        //console.log("online: ", online);
         console.log("online: "+Object.keys(online).length);
     }, 1000 * 30)
+}
+
+function bcid2ip(online, bcid) {
+    var ip = null;
+    _.each(online, function(cid, sid) {
+        if (cid[0] == bcid) ip = cid[2];
+    });
+    return ip;
 }

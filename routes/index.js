@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var logger = require('../modules/logger');
 var characters = require('../modules/characters.js');
+var sched = require('../modules/schedule.js');
 var util = require('../modules/util');
 
 /* GET home page. */
