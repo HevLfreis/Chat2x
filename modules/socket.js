@@ -18,7 +18,10 @@ module.exports = Socket;
 // Todo: Socket.IO Authentication, sessionid
 // Todo: multiple same page, disconnect one , others ?
 // Todo: date.now and new date()
+// Todo: admin enter
+// Todo: nginx pass limit
 function Socket(srv) {
+
     var io = socket(srv);
 
     // use express-session as socket session (connect.sid)
@@ -28,24 +31,35 @@ function Socket(srv) {
 
     // online: online list { sessionid: [characterid, expires]... }
     // socket2session: fix the multiple page of same session
-    const online = {}, socket2session = {};
+    const online = {}, socket2session = {}, blacklist = [];
     cleanDeadSession(online);
 
     io.on('connection', function(socket) {
 
         var req = socket.request,
             sess = req.session,
+            ipaddr = util.req2ip(req),
             store = req.sessionStore,
             sid = sess.id,
             admin = false,
-            cookies = cookie.parse(socket.handshake.headers['cookie']),
+            cookies = {},
             skid = socket.id.slice(2);
 
+        // disable ip in blacklist
+        if (_.contains(blacklist, ipaddr)) {
+            socket.disconnect();
+            return;
+        }
+
+        // maybe no cookie
+        if (typeof socket.handshake.headers['cookie'] == 'string') {
+            cookies = cookie.parse(socket.handshake.headers['cookie']);
+        }
+
+        // admin check
         if (socket.handshake.query.pass === "12345678") {
             admin = true;
         }
-
-        console.log(admin);
 
         if (sid in socket2session) {
             if (!_.contains(socket2session[sid], skid)) {
@@ -70,24 +84,28 @@ function Socket(srv) {
         // if there's no cid to use, use 'a'(Friend A)
         // if session/cookie existed, keep the cid to forbid refreshing for a new one
         var cid = 'a';
-        if (admin) {
-            cid = 'admin';
-            logger.info(formatter('admin', req, cid));
-        }
-        else if (sid in online) {
+
+        if (sid in online) {
             cid = online[sid][0];
             logger.info(formatter('reconnect', req, cid));
+        }
+        else if (admin) {
+            cid = 'admin';
+            logger.info(formatter('admin', req, cid));
         }
         else {
 
             // map cid to a list
-            var onlineIndex = _.map(online, function(cid, sid) {
+            var onlineIndex = _.shuffle(_.map(online, function(cid, sid) {
                 return cid[0];
-            });
-            // reject cid already online
+            }));
+
+            // reject cid already online, exclude admin
             var scid = _.sample(_.reject(Object.keys(characters), function(k) {
                 //if (_.contains(onlineIndex, k)) console.log('have: ',k);
-                return _.contains(onlineIndex, k);
+                if (k == 'admin') return false;
+                else return _.contains(onlineIndex, k);
+
             }), 1)[0];
 
             if (scid !== undefined) cid = scid;
@@ -95,18 +113,26 @@ function Socket(srv) {
         }
 
         var cname = characters[cid]['name'];
-        online[sid] = [cid, null];
-        io.to(room).emit('chat', { name: cname, t: 'sysin'});
+
+        // forbid multiple sysin msg
+        if (!(sid in online)) {
+            io.to(room).emit('chat', { name: cname, t: 'sysin'});
+        }
         io.to(room).emit('info', [{ cid: cid, color: characters[cid]['color']}]);
+        online[sid] = [cid, null, null];
 
         socket.on('chat', function(msg){
 
-            console.log(cid, msg);
-
+            //console.log(cid, msg);
             if (msg === '') {
                 msg = characters[cid]['remark'];
             }
+            else if (admin && msg.lastIndexOf('ban:$', 0) === 0) {
+                //console.log('adminban');
+            }
             else {
+
+                msg = msg.slice(0, 140);
 
                 // save msg to db
                 var histroy = new Message({
@@ -116,9 +142,7 @@ function Socket(srv) {
                     msg: msg,
                     time: Date.now()
                 });
-                histroy.save(function(err, his) {
-                    console.log(his.id);
-                });
+                histroy.save();
             }
 
             // emit the msg to all clients
@@ -180,6 +204,6 @@ function cleanDeadSession(online) {
             }
         });
 
-        console.log(online);
+        console.log("online: "+Object.keys(online).length);
     }, 1000 * 30)
 }

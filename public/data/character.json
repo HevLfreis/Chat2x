@@ -1,7 +1,7 @@
 {
   "admin": {
     "name": "观测者",
-    "remark": "我也是新世界の神"
+    "remark": "因为lz白天还要上班，改改bug，整理log，没事pp图加新角色，没有时间打理聊天室。不小心有人飙车lz就要被警察叔叔抓走了，所以，白天和半夜聊天室会暂时404，每天大约下午6点左右重新开放，欢迎大家收藏，喜欢到时候来玩~~"
   },
   "a": {
     "name": "友人A",
@@ -22,6 +22,43 @@
   "nagisa": {
     "name": "渚薰",
     "remark": "正是为了与你相遇，我才降生到这个世界"
+  },
+  "yui": {
+    "name": "唯",
+    "remark": "哈-----梓喵~~"
+  },
+  "mio": {
+    "name": "秋山澪",
+    "remark": "我嫁不出去了……"
+  },
+  "azusa": {
+    "name": "梓喵",
+    "remark": "前辈！！！"
+  },
+  "lelouch": {
+    "name": "ZERO",
+    "remark": "如果你是魔女，我只要化身魔王就可以了"
+  },
+  "cc": {
+    "name": "C.C.",
+    "remark": "鲁路修，你知道雪为什么是白色的吗？因为忘记了自己曾经的颜色"
+  },
+  "okabe": {
+    "name": "凤凰院凶真",
+    "remark": "el psy congroo"
+  },
+  "kurisu": {
+    "name": "助手",
+    "remark": "HENTAI ！"
+  },
+  "kotori": {
+    "name": "南小鸟",
+    "remark": "把你们全部都变成小鸟的点心"
+  },
+  "nico": {
+    "name": "矢泽妮可",
+    "remark": "NicoNicoNi~ o(〃'▽'〃) V",
+    "color": [255, 192, 203]
   },
   "l": {
     "name": "L",
@@ -75,12 +112,12 @@
   },
   "rem": {
     "name": "蕾姆",
-    "remark": "486, RemのHero",
+    "remark": "真的，昴是个很过分的人呢",
     "color": [141, 192, 253]
   },
   "emt": {
     "name": "莉雅",
-    "remark": "...等下一季就能有台词了"
+    "remark": "我已经嫁给了管理桑，你们不用抢了"
   },
   "hakase": {
     "name": "博士",
@@ -90,6 +127,10 @@
     "name": "坂本先生",
     "remark": "要叫我先生。哎这个好好玩啊"
   },
+  "shirou": {
+    "name": "士郎",
+    "remark": "Trace on"
+  },
   "saber": {
     "name": "Saber",
     "remark": "你是我的master吗"
@@ -97,6 +138,10 @@
   "lin": {
     "name": "远坂凛",
     "remark": "Archer，到我房间来"
+  },
+  "gilgamesh": {
+    "name": "英雄王",
+    "remark": "杂修"
   },
   "kaori": {
     "name": "宫园薰",
@@ -122,5 +167,21 @@
   "shana": {
     "name": "夏娜",
     "remark": "无路赛，无路赛，无路赛 (┙>∧<)┙へ┻┻"
+  },
+  "makoto": {
+    "name": "大家的诚",
+    "remark": "下面的我都上过"
+  },
+  "gintoki": {
+    "name": "坂田银时",
+    "remark": "不好意思，我是流氓"
+  },
+  "asuna": {
+    "name": "亚丝娜",
+    "remark": "初次见面，我是结城明日奈。——我回来了，桐人"
+  },
+  "kirito": {
+    "name": "桐人",
+    "remark": "听说我老婆本子特别多？"
   }
 }

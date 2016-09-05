@@ -10,6 +10,11 @@ router.get('/', function(req, res, next) {
     res.render('room', { title: 'Chat2x' });
 });
 
+//router.get('/', function(req, res, next) {
+//    logger.info(util.formatter('access', req));
+//    res.render('space', { title: 'Chat2x' });
+//});
+
 router.get('/bingo', function(req, res, next) {
     res.render('bingo', { title: 'Chat2x' });
 });

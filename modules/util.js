@@ -6,8 +6,12 @@
 var _ = require('underscore');
 
 function reqLogFormatter(act, req) {
+    return act.toUpperCase()+' (' + req2ip(req) + ')' + req.sessionID;
+}
+
+function req2ip(req) {
     var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-    return act.toUpperCase()+' (' + _.last(ip.split(':')) + ')' + req.sessionID;
+    return _.last(ip.split(':'));
 }
 
 //var TrieFilter = {
@@ -15,4 +19,7 @@ function reqLogFormatter(act, req) {
 //    dict: TrieFilter
 //};
 
-module.exports = {formatter: reqLogFormatter};
+module.exports = {
+    formatter: reqLogFormatter,
+    req2ip: req2ip
+};

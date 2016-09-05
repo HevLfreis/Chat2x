@@ -3,9 +3,9 @@
  * Date: 2016/8/25
  * Time: 17:29
  */
-
+var regex = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/;
 var socket;
-if (admin!==undefined&&admin) {
+if (admin !== undefined && admin) {
     var pass = prompt("Pass");
     socket = io(window.location.origin, { query: "pass="+pass });
 }
@@ -14,7 +14,8 @@ else {
 }
 
 // bubble color info from server
-var colorIndex = [];
+// cooling status
+var colorIndex = [], cooling = false;
 
 socket.on('chat', function(msg){
     //console.log(msg);
@@ -67,11 +68,35 @@ var message = new Vue({
     },
     methods: {
         send: function() {
+
+            if (cooling) return;
+
             //console.log(chat.items);
-            socket.emit('chat', this.message);
-            //chat.items.unshift({name: 'L', msg: this.message});
-            this.message = '';
+            var m = this.message;
+
+            if (regex.test(m)) {
+                this.message = '';
+                alert('停车！！！');
+                return;
+            }
+
+            if (m.length > 140) {
+                m = m.slice(0, 140);
+            }
+
+            socket.emit('chat', m);
+
+            this.message = '阿姆斯特朗回旋加速喷气式阿姆斯特朗炮冷却中...';
+            $('textarea').attr('disabled', true);
             $('body').animate({ scrollTop: 0 }, 200);
+
+            cooling = true;
+            setTimeout(function() {
+                message.message = '';
+                $('textarea').attr('disabled', false);
+                cooling = false;
+            }, 10 * 1000);
+
         }
     }
 });
@@ -82,7 +107,6 @@ var chat = new Vue({
         items: []
     }
 });
-
 
 var colorLighter = function(rgb, percent) {
     return [parseInt(rgb[0] + (256 - rgb[0]) * percent / 100),
