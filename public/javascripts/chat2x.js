@@ -113,3 +113,14 @@ var colorLighter = function(rgb, percent) {
         parseInt(rgb[1] + (256 - rgb[1]) * percent / 100),
         parseInt(rgb[2] + (256 - rgb[2]) * percent / 100)]
 };
+
+var clearDOMs = function()
+{
+	var chatContainer = chat.$data.items;
+	var removecount = Math.round(chatContainer.length * 0.8, 0);
+	if (removecount/0.8 < 100)return 'Nothing to clear';
+	chat.$data.items = chat.$data.items.slice(0,chat.$data.items.length*0.8);
+	return "removed " + removecount + " DOMs";
+}
+
+var cDOMInterval = setInterval('clearDOMs()', 10000);
