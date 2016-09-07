@@ -3,9 +3,12 @@
  * Date: 2016/8/25
  * Time: 17:29
  */
-var urlRegex = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/;
-var wordRegex = /(link)|(pan)|(share)|(傻逼)|(你妈)/;
 
+// Todo: linking server timeout
+var urlRegex = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/;
+var wordRegex = /(link)|(pan)|(share)|(baidu)|(magnet)|(傻逼)|(你妈)|(妈逼)|(操你)/;
+
+// init socket
 var socket;
 if (admin !== undefined && admin) {
     var pass = prompt("Pass");
@@ -17,8 +20,9 @@ else {
 
 // bubble color info from server
 // cooling status
-var colorIndex = [], cooling = false;
+var colorIndex = [], cooling = false, remarking = false;
 
+// socket events
 socket.on('chat', function(msg){
     //console.log(msg);
 
@@ -53,8 +57,6 @@ socket.on('info', function(infos){
 
         }
     });
-
-    //console.log(colorIndex);
 });
 
 socket.on('offline', function(off){
@@ -74,7 +76,19 @@ var message = new Vue({
             if (cooling) return;
 
             //console.log(chat.items);
-            var m = this.message;
+            var m = this.message.trim().slice(0, 140);
+
+            if (remarking && m.length == 0) {
+                alert('台词蓄力中...');
+                return;
+            }
+            if (m.length == 0) {
+                remarking = true;
+                // remarking reset
+                setTimeout(function() {
+                    remarking = false;
+                }, 20 * 1000);
+            }
 
             if (urlRegex.test(m) || wordRegex.test(m)) {
                 this.message = '';
@@ -82,23 +96,22 @@ var message = new Vue({
                 return;
             }
 
-            if (m.length > 140) {
-                m = m.slice(0, 140);
-            }
-
             socket.emit('chat', m);
-
-            this.message = '阿姆斯特朗回旋加速喷气式阿姆斯特朗炮冷却中...';
-            $('textarea').attr('disabled', true);
             $('body').animate({ scrollTop: 0 }, 200);
 
-            cooling = true;
-            setTimeout(function() {
-                message.message = '';
-                $('textarea').attr('disabled', false);
-                cooling = false;
-            }, 10 * 1000);
-
+            if (!admin) {
+                this.message = '阿姆斯特朗回旋加速喷气式阿姆斯特朗炮冷却中...';
+                $('textarea').attr('disabled', true);
+                cooling = true;
+                setTimeout(function() {
+                    message.message = '';
+                    $('textarea').attr('disabled', false);
+                    cooling = false;
+                }, 8 * 1000);
+            }
+            else {
+                this.message = '';
+            }
         }
     }
 });
@@ -110,14 +123,17 @@ var chat = new Vue({
     }
 });
 
+
 // dom collecter
 setInterval(function() {
-    if (chat.items.length > 250) {
+    if (chat.items.length > 100) {
         $('body').animate({ scrollTop: 0 }, 200);
-        chat.items = chat.items.slice(0, 50);
+        chat.items = chat.items.slice(0, 25);
     }
 }, 60 * 1000);
 
+
+// util functions
 var colorLighter = function(rgb, percent) {
     return [parseInt(rgb[0] + (256 - rgb[0]) * percent / 100),
         parseInt(rgb[1] + (256 - rgb[1]) * percent / 100),
