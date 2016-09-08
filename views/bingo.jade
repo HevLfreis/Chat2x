@@ -11,12 +11,11 @@ block content
         .col-md-6.col-md-offset-3.text-center
             .box-message-inner
               textarea(v-model='message', v-on:keydown.enter.prevent='send')
-              //| <button v-on:click="send">POST!</div>
-              button(v-on:click="send")= 'POST!'
+              button= 'POST!'
 
   .container.box-chat
     .row
-      .col-md-8.col-md-offset-2.box-talks
+      .col-md-8.col-md-offset-2.box-talks.fly
         template(v-for='item in items')
           .msg-default
             .msg-user.text-center
@@ -25,11 +24,14 @@ block content
             .msg-bubble.bounce(v-bind:style="{ \
                 background: item.background \
               }")= '{{ item.msg }}'
+  a#back-to-top(href='#')
+    i.fa.fa-info
 
 block script
   script(src='/javascripts/jquery.min.js')
   script(src='/javascripts/bootstrap.min.js')
   script(src='/javascripts/vue.min.js')
+  script(src='/javascripts/jquery.avgrund.min.js')
   script(src='/javascripts/bingo.js')
 
 

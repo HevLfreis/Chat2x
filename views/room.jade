@@ -11,7 +11,6 @@ block content
         .col-md-6.col-md-offset-3.text-center
             .box-message-inner
               textarea(v-model='message', v-on:keydown.enter.prevent='send')
-              //| <button v-on:click="send">POST!</div>
               button(v-on:click="send")= 'POST!'
 
   .container.box-chat
@@ -31,14 +30,15 @@ block content
               .msg-bubble.bounce(v-bind:style="{ \
                   background: item.background, color: item.color \
                 }")= '{{ item.msg }}'
+  a#back-to-top(href='#')
+    i.fa.fa-info
+
 block script
   script(src='/javascripts/jquery.min.js')
   script(src='/javascripts/bootstrap.min.js')
   script(src='/javascripts/vue.min.js')
-  //script(src='/plugins/rollbar/js/jquery.easing.1.3.js')
-  //script(src='/plugins/rollbar/js/jquery.mousewheel.js')
-  //script(src='/plugins/rollbar/js/jquery.rollbar.min.js')
   script(src='/javascripts/socket.io-1.4.5.js')
+  script(src='/javascripts/jquery.avgrund.min.js')
   if admin
     script(type='text/javascript').
       var admin= true;
@@ -46,7 +46,7 @@ block script
     script(type='text/javascript').
       var admin = false;
   script(src='/javascripts/chat2x.js')
-  //script(src='/javascripts/rollbar.js')
+  script(src='/javascripts/analytics.js')
 
 
 

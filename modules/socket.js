@@ -29,7 +29,7 @@ function Socket(srv) {
         session(socket.request, socket.request.res, next);
     });
 
-    // online: online list { sessionid: [characterid, expires]... }
+    // online: online list { sessionid: [characterid, expires, ipaddr]... }
     // socket2session: fix the multiple page of same session
     const online = {}, socket2session = {}, blacklist = [];
     cleanDeadSession(online);
@@ -46,11 +46,11 @@ function Socket(srv) {
             skid = socket.id.slice(2);
 
         // disable ip in blacklist
-        if (_.contains(blacklist, ipaddr)) {
-            console.log("ban")
-            socket.disconnect();
-            return;
-        }
+        //if (_.contains(blacklist, ipaddr)) {
+        //    console.log("ban")
+        //    socket.disconnect();
+        //    return;
+        //}
 
         // maybe no cookie
         if (typeof socket.handshake.headers['cookie'] == 'string') {
@@ -114,6 +114,7 @@ function Socket(srv) {
         }
 
         var cname = characters[cid]['name'];
+        socket.emit('name', cname);
 
         // forbid multiple sysin msg
         if (!(sid in online)) {
@@ -122,18 +123,22 @@ function Socket(srv) {
         io.to(room).emit('info', [{ cid: cid, color: characters[cid]['color']}]);
         online[sid] = [cid, null, ipaddr];
 
+        // emit active num to all clients
+        io.to(room).emit('active', Object.keys(online).length);
+
+
         socket.on('chat', function(msg){
 
             //console.log(cid, msg);
             if (msg === '') {
                 msg = characters[cid]['remark'];
             }
-            else if (admin && msg.lastIndexOf('ban:$', 0) === 0) {
-                var bcid = msg.slice(5);
-                blacklist.push(bcid);
-
-                console.log(blacklist, bcid2ip(online, bcid));
-            }
+            //else if (admin && msg.lastIndexOf('ban:$', 0) === 0) {
+            //    var bcid = msg.slice(5);
+            //    blacklist.push(bcid);
+            //
+            //    console.log(blacklist, bcid2ip(online, bcid));
+            //}
             else {
 
                 msg = msg.slice(0, 140);
@@ -170,7 +175,7 @@ function Socket(srv) {
                 else {
                     // if the cookie not expired, we keep the sid for
                     // client to avoid refreshing for a new cid
-                    online[sid] = [cid, expires];
+                    online[sid] = [cid, expires, ipaddr];
                     logger.info(formatter('keepalive', req, cid));
                 }
             }
@@ -183,10 +188,13 @@ function Socket(srv) {
             // when a session is disconnect
             // we should disable all the sockets which share
             // the sessionid.
-            io.to(room).emit('offline', socket2session[sid]);
-            delete socket2session[sid];
+            if (sid in socket2session) {
+                io.to(room).emit('offline', socket2session[sid]);
+                delete socket2session[sid];
+            }
 
-            //io.to(room).emit('chat', { name: cname, t: 'sysout'});
+            // emit active num to all clients
+            io.to(room).emit('active', Object.keys(online).length);
 
         });
     });
@@ -212,10 +220,10 @@ function cleanDeadSession(online) {
     }, 1000 * 30)
 }
 
-function bcid2ip(online, bcid) {
-    var ip = null;
-    _.each(online, function(cid, sid) {
-        if (cid[0] == bcid) ip = cid[2];
-    });
-    return ip;
-}
+//function bcid2ip(online, bcid) {
+//    var ip = null;
+//    _.each(online, function(cid, sid) {
+//        if (cid[0] == bcid) ip = cid[2];
+//    });
+//    return ip;
+//}

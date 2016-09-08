@@ -4,6 +4,28 @@
  * Time: 15:57
  */
 
+var num = 0;
+
+$('#back-to-top').avgrund({
+    width: 320,
+    height: 185,
+    holderClass: 'inner',
+    showClose: true,
+    showCloseText: '关闭',
+    onBlurContainer: '.container',
+    onLoad: function (elem) {
+        elem.hide();
+    },
+    onUnload: function (elem) {
+        elem.show()
+    },
+    template: '<h3><strong>Chat2x</strong></h3>' +
+    '<p>Online: '+num+'个基佬</p>' +
+    '<div class="text-center">' +
+    '<a href="#" class="cross">CROSS HORIZON</a>' +
+    '</div>'
+});
+
 var chat = new Vue({
     el: '.box-talks',
     data: {

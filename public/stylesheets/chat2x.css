@@ -1,158 +1,241 @@
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
+
 body {
-  font-family: 'Source Sans Pro', 'Helvetica Neue', 'Microsoft YaHei', Helvetica, Arial, sans-serif;
-  width: 100%;
-  height: 100%;
-  margin-bottom: 60px;
-  background: #0a0a0a;
+    font-family: 'Source Sans Pro', 'Helvetica Neue', 'Microsoft YaHei', Helvetica, Arial, sans-serif;
+    width: 100%;
+    height: 100%;
+    margin-bottom: 60px;
+    background: #0a0a0a;
 }
+
 .footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 60px;
-  background-color: #f5f5f5;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    background-color: #f5f5f5;
 }
+
 body > .container {
-  padding: 60px 15px 0;
+    padding: 60px 15px 0;
 }
+
 .container .text-muted {
-  margin: 20px 0;
+    margin: 20px 0;
 }
+
 .footer > .container {
-  padding-right: 15px;
-  padding-left: 15px;
+    padding-right: 15px;
+    padding-left: 15px;
 }
+
 code {
-  font-size: 80%;
+    font-size: 80%;
+}
+
+a:hover {
+    text-decoration: none;
 }
 
 .navbar {
-  background-color: #efefef;
+    background-color: #efefef;
 }
 
 .form-group {
-  margin: 5px;
+    margin: 5px;
 }
 
 .box-message {
-  padding: 5px 0 0 0;
-  color: #0a0a0a;
+    padding: 5px 0 0 0;
+    color: #0a0a0a;
 }
 
 .box-message-inner {
-  /*width: 100%;*/
-  /*text-align: center;*/
+    /*width: 100%;*/
+    /*text-align: center;*/
 }
 
 .box-message-inner textarea {
-  width: 100%;
-  clear: both;
-  font-size: 16px;
-  letter-spacing: 1px;
-  padding: 10px;
-  border: 3px #5b5b5b solid;
-  border-radius: 10px;
-  -moz-border-radius: 10px;
-  -webkit-border-radius: 10px;
-  overflow-y: hidden;
-  outline: none;
+    width: 100%;
+    clear: both;
+    font-size: 16px;
+    letter-spacing: 1px;
+    padding: 10px;
+    border: 3px #5b5b5b solid;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    overflow-y: hidden;
+    outline: none;
+    resize: none;
 }
 
 .box-message-inner button {
-  border: 0;
-  margin: 5px;
-  height: 25px;
-  width: 200px;
-  font-size: 12px;
-  font-family: "Meiryo", sans-serif;
-  color: #201e1a;
-  font-weight: bold;
-  background: transparent url('../images/submit.gif') 0 0 no-repeat;
-  outline: none;
+    border: 0;
+    margin: 5px;
+    height: 25px;
+    width: 200px;
+    font-size: 12px;
+    font-family: "Meiryo", sans-serif;
+    color: #201e1a;
+    font-weight: bold;
+    background: transparent url('../images/submit.gif') 0 0 no-repeat;
+    outline: none;
 }
 
 .box-message-inner button:active {
-  background: transparent url('../images/submit.gif') 0 1px no-repeat;
+    background: transparent url('../images/submit.gif') 0 1px no-repeat;
 }
 
 .container.box-chat {
-  padding-top: 125px;
-  color: #ffffff;
+    padding-top: 125px;
+    color: #ffffff;
 }
 
 .msg-system {
-  margin: 10px 0 30px 20px;
-  letter-spacing: 3px;
-  clear: left;
+    margin: 10px 0 30px 20px;
+    letter-spacing: 3px;
+    clear: left;
 }
 
 .msg-default {
-  min-height: 80px;
-  margin-top: 10px;
-  margin-bottom: 20px;
+    min-height: 80px;
+    margin-top: 10px;
+    margin-bottom: 20px;
 }
 
 /* Todo: 700px msg \n fix !*/
 .msg-user {
-  min-height: 20px;
-  width: 90px;
-  /*padding-top: 58px;*/
-  padding-bottom: 10px;
-  text-align: center;
-  display: inline-block;
-  line-height: 20px;
-  float: left;
-  font-weight: bold;
+    min-height: 20px;
+    width: 90px;
+    /*padding-top: 58px;*/
+    padding-bottom: 10px;
+    text-align: center;
+    display: inline-block;
+    line-height: 20px;
+    float: left;
+    font-weight: bold;
 }
 
 .img-avatar {
-  width: 58px;
-  height: 58px;
-  border: 3px solid #fff;
-  margin: auto;
+    width: 58px;
+    height: 58px;
+    border: 3px solid #fff;
+    margin: auto;
 }
 
 .msg-bubble {
-  max-width: 600px;
-  display: inline-block;
-  /*word-break: break-all;*/
-  padding: 15px 20px;
-  border-radius: 13px;
-  border: 4px #fff solid;
-  -moz-border-radius: 13px;
-  -webkit-border-radius: 13px;
-  background: #000;
-  font: 1em "Meiryo", sans-serif;
-  font-weight: bold;
-  letter-spacing: 3px;
-  color: white;
+    max-width: 600px;
+    display: inline-block;
+    /*word-break: break-all;*/
+    padding: 15px 20px;
+    border-radius: 13px;
+    border: 4px #fff solid;
+    -moz-border-radius: 13px;
+    -webkit-border-radius: 13px;
+    background: #000;
+    font: 1em "Meiryo", sans-serif;
+    font-weight: bold;
+    letter-spacing: 3px;
+    color: white;
 }
 
 @media (max-width: 480px) {
-  .msg-bubble {
-    max-width: 70%;
-  }
+    .msg-bubble {
+        max-width: 70%;
+    }
 }
 
 .bounce {
-  animation: bounce .2s linear 1;
-  transform-origin: 20px 30px;
+    animation: bounce .2s linear 1;
+    transform-origin: 20px 30px;
 }
 
 @keyframes bounce {
-  0%,
-  1%{
-    transform: scale(.2);
-  }
-  50%{
-    transform: scale(1.2);
-  }
-  100%{
-    transform: scale(1);
-  }
+    0%,
+    1% {
+        transform: scale(.2);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
 
+.inner {
+    border: 5px solid #ffc424;
+    border-radius: 5px;
+}
+
+.inner h3 {
+    padding: 10px 20px;
+    margin: 15px 0 0;
+    font-size: 18px;
+    font-weight: 300;
+    text-align: justify;
+}
+
+.inner p {
+    padding: 0 20px;
+    margin: 5px 0;
+    font-size: 12px;
+    font-weight: 300;
+    text-align: justify;
+}
+
+.inner div {
+    padding: 10px 20px;
+}
+
+.cross {
+    float: left;
+    width: 100%;
+    text-align: center;
+    font-size: 12px;
+    color: white;
+    padding: 8px 20px;
+    margin-top: 18px;
+    text-decoration: none;
+    -webkit-transition: background 0.3s ease;
+    -moz-transition: background 0.3s ease;
+    -ms-transition: background 0.3s ease;
+    -o-transition: background 0.3s ease;
+    transition: background 0.3s ease;
+    background: rgba(71, 186, 255, 0.8);
+}
+
+.cross:hover {
+    color: white;
+    background: rgba(71, 186, 255, 1);
+}
+
+#back-to-top {
+    position: fixed;
+    height: 30px;
+    bottom: 25px;
+    right: 20px;
+    background: rgba(79, 204, 145, 0.8);
+    color: #ffffff;
+    text-align: center;
+    border-radius: 2px;
+    z-index: 1;
+}
+
+#back-to-top:hover {
+    background: #4fcc91;
+}
+
+#back-to-top span {
+    padding: 5px 15px;
+    line-height: 30px
+}
+
+#back-to-top i {
+    width: 30px;
+    line-height: 30px
 }

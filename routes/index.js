@@ -10,6 +10,7 @@ var util = require('../modules/util');
 var page = { name: 'room' };
 sched(page);
 
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
     logger.info(util.formatter('access', req));
