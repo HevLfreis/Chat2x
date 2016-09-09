@@ -27,11 +27,12 @@ var colorIndex = [],
     remarking = false,
     active = 0;
 
-
-//
+// Todo: fix width fixed when page return
 socket.on('name', function(name) {
     var $btp = $('#back-to-top');
+    $btp.width('auto');
     $btp.html('<span>连接到角色：'+name+'</span>');
+
     setTimeout(function() {
         $btp.find('span').fadeOut();
         $btp.animate({'width': 30}, 1000, function() {
@@ -42,10 +43,7 @@ socket.on('name', function(name) {
 
 //
 socket.on('active', function(num) {
-    if (active === 0) {
-        setPopin(num);
-    }
-    active = num-1;
+    active = num - 1;
 });
 
 // socket events
@@ -149,16 +147,43 @@ var chat = new Vue({
     }
 });
 
+// popin
+$('#back-to-top').avgrund({
+    width: 320,
+    height: 335,
+    holderClass: 'inner',
+    showClose: true,
+    showCloseText: '关闭',
+    onBlurContainer: '.container',
+    onLoad: function (elem) {
+        elem.fadeOut();
+    },
+    onLoaded: function () {
+        $('#active').text('现在有'+active+'个野生的魔法少女(๑•̀ㅂ•́)و✧');
+    },
+    onUnload: function (elem) {
+        elem.fadeIn();
+    },
+    template: '<h3><strong>Chat2x</strong>: 次元聊天室</h3>' +
+    '<p>随机分配动漫角色，两分钟后刷新更换</p>' +
+    '<p>发言有冷却时间，直接点POST发送角色台词</p>' +
+    '<p>裂缝崩坏: 每天PM6:30-PM11:35</p>' +
+    '<p>催更，意见，技术讨论群331774726</p>' +
+    '<p>我的主页: seeleit.com</p>' +
+    '<p class="text-danger">今日新增角色：集，祈，秀吉</p><br>' +
+    '<p id="active">现在有'+active+'个野生的魔法少女(๑•̀ㅂ•́)و✧</p>' +
+    '<div class="text-center">' +
+    '<a href="#" class="cross disabled">CROSS HORIZON</a>' +
+    '</div>'
+});
 
-// dom collecter, online num update
+
+// dom collecter
 setInterval(function() {
     if (chat.items.length > 100) {
         $('body').animate({ scrollTop: 0 }, 200);
         chat.items = chat.items.slice(0, 25);
     }
-
-    setPopin(active);
-
 }, 60 * 1000);
 
 
@@ -169,30 +194,3 @@ var colorLighter = function(rgb, percent) {
         parseInt(rgb[2] + (256 - rgb[2]) * percent / 100)]
 };
 
-var setPopin = function(num) {
-    $('#back-to-top').avgrund({
-        width: 320,
-        height: 335,
-        holderClass: 'inner',
-        showClose: true,
-        showCloseText: '关闭',
-        onBlurContainer: '.container',
-        onLoad: function (elem) {
-            elem.fadeOut();
-        },
-        onUnload: function (elem) {
-            elem.fadeIn();
-        },
-        template: '<h3><strong>Chat2x</strong>: 次元聊天室</h3>' +
-        '<p>随机分配动漫角色，两分钟后刷新更换</p>' +
-        '<p>发言有冷却时间，直接点POST发送角色台词</p>' +
-        '<p>裂缝崩坏: 每天PM6:30-PM11:35</p>' +
-        '<p>催更，意见群331774726</p>' +
-        '<p>我的主页: seeleit.com</p>' +
-        '<p class="text-danger">今日新增角色：魔理沙，紫妈，大小姐</p><br>' +
-        '<p>现在有'+num+'个和你一样的中二少年(๑•̀ㅂ•́)و✧</p>' +
-        '<div class="text-center">' +
-        '<a href="#" class="cross disabled">CROSS HORIZON</a>' +
-        '</div>'
-    });
-};

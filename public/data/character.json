@@ -274,14 +274,27 @@
   },
   "yukari": {
     "name": "八云紫",
-    "remark": "我是八云紫妈，今年17岁"
+    "remark": "我是八云紫，今年17岁"
   },
   "marisa": {
     "name": "魔理沙",
-    "remark": "射擊的時候要集中精神哦"
+    "remark": "弹幕最重要的是火力da☆ze！"
   },
   "remilia": {
     "name": "大小姐",
     "remark": "给我来一杯85年的红茶"
+  },
+  "shu": {
+    "name": "集",
+    "remark": "我的王之力啊♂"
+  },
+  "inory": {
+    "name": "祈",
+    "remark": "请使用我",
+    "color": [195, 70, 24]
+  },
+  "hideyoshi": {
+    "name": "秀吉",
+    "remark": "老朽的性别是男"
   }
 }

@@ -20,6 +20,8 @@
     "mongoose": "^4.5.10",
     "morgan": "~1.7.0",
     "node-schedule": "^1.1.1",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
     "serve-favicon": "~2.3.0",
     "socket.io": "^1.4.8",
     "underscore": "^1.8.3",

@@ -8,10 +8,11 @@ var mongoose = require('mongoose');
 var msgSchema = mongoose.Schema({
     sid: String,
     cid: String,
+    ipaddr: String,
     room: String,
     msg: String,
-    time: Date
-});
+    timestamp: Date
+}, { strict: false });
 
 var Message = mongoose.model('Messages', msgSchema);
 

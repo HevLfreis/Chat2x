@@ -7,7 +7,7 @@ var util = require('../modules/util');
 
 // Todo: fix this
 // change page based on schedule
-var page = { name: 'room' };
+var page = { name: 'space' };
 sched(page);
 
 

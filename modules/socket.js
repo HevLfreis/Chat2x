@@ -147,9 +147,10 @@ function Socket(srv) {
                 var histroy = new Message({
                     sid: sid,
                     cid: cid,
+                    ipaddr: ipaddr,
                     room: room,
                     msg: msg,
-                    time: Date.now()
+                    timestamp: Date.now()
                 });
                 histroy.save();
             }
