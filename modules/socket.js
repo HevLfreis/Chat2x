@@ -31,7 +31,7 @@ function Socket(srv) {
 
     // online: online list { sessionid: [characterid, expires, ipaddr]... }
     // socket2session: fix the multiple page of same session
-    const online = {}, socket2session = {}, blacklist = [];
+    const online = {}, socket2session = {};
     cleanDeadSession(online);
 
     io.on('connection', function(socket) {
@@ -44,13 +44,6 @@ function Socket(srv) {
             admin = false,
             cookies = {},
             skid = socket.id.slice(2);
-
-        // disable ip in blacklist
-        //if (_.contains(blacklist, ipaddr)) {
-        //    console.log("ban")
-        //    socket.disconnect();
-        //    return;
-        //}
 
         // maybe no cookie
         if (typeof socket.handshake.headers['cookie'] == 'string') {
@@ -97,17 +90,20 @@ function Socket(srv) {
         else {
 
             // map cid to a list
-            var onlineIndex = _.shuffle(_.map(online, function(cid, sid) {
+            var onlineIndex = _.map(online, function(cid, sid) {
                 return cid[0];
-            }));
+            });
 
             // reject cid already online, exclude admin
-            var scid = _.sample(_.reject(Object.keys(characters), function(k) {
-                //if (_.contains(onlineIndex, k)) console.log('have: ',k);
-                if (k == 'admin') return true;
-                else return _.contains(onlineIndex, k);
+            var scid =
+                _.sample(
+                    _.shuffle(
+                        _.reject(Object.keys(characters), function(k) {
+                            //if (_.contains(onlineIndex, k)) console.log('have: ',k);
+                            if (k == 'admin') return true;
+                            else return _.contains(onlineIndex, k);
 
-            }), 1)[0];
+            })), 1)[0];
 
             if (scid !== undefined) cid = scid;
             logger.info(formatter('connect', req, cid));
@@ -133,12 +129,14 @@ function Socket(srv) {
             if (msg === '') {
                 msg = characters[cid]['remark'];
             }
-            //else if (admin && msg.lastIndexOf('ban:$', 0) === 0) {
-            //    var bcid = msg.slice(5);
-            //    blacklist.push(bcid);
-            //
-            //    console.log(blacklist, bcid2ip(online, bcid));
-            //}
+            else if (admin && msg.lastIndexOf('admin$', 0) === 0) {
+                var warn= msg.split('$')[1].trim();
+                if (_.contains(Object.keys(characters), warn)) {
+                    io.to(room).emit('chat', { name: characters[warn]['name'], t: 'syswarn'});
+                }
+
+                return;
+            }
             else {
 
                 msg = msg.slice(0, 140);
@@ -220,11 +218,3 @@ function cleanDeadSession(online) {
         console.log("online: "+Object.keys(online).length);
     }, 1000 * 30)
 }
-
-//function bcid2ip(online, bcid) {
-//    var ip = null;
-//    _.each(online, function(cid, sid) {
-//        if (cid[0] == bcid) ip = cid[2];
-//    });
-//    return ip;
-//}
