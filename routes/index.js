@@ -1,13 +1,17 @@
 var express = require('express');
 var router = express.Router();
+var moment = require('moment');
 var logger = require('../modules/logger');
 var characters = require('../modules/characters.js');
 var sched = require('../modules/schedule.js');
 var util = require('../modules/util');
 
-// Todo: fix this
-// change page based on schedule
-var page = { name: 'room' };
+
+var start = moment('18-30', 'H-m'),
+    end = moment('23-35', 'H-m'),
+    now = moment();
+
+var page = (start<now&&now<end) ? { name: 'room' }:{ name: 'space' };
 sched(page);
 
 

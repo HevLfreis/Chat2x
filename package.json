@@ -17,6 +17,7 @@
     "express-session": "^1.14.1",
     "jade": "~1.11.0",
     "jimp": "^0.2.27",
+    "moment": "^2.14.1",
     "mongoose": "^4.5.10",
     "morgan": "~1.7.0",
     "node-schedule": "^1.1.1",

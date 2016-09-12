@@ -8,7 +8,7 @@ $('button').bind("touchstart", function(){}, true);
 
 // Todo: linking server timeout
 var urlRegex = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/;
-var wordRegex = /(link)|(pan)|(share)|(baidu)|(magnet)|(傻逼)|(你妈)|(妈逼)|(操你)/;
+var wordRegex = /(link)|(pan)|(share)|(baidu)|(magnet)|(傻逼)|(你妈)|(妈逼)|(操你)|(啪啪)/;
 
 // init socket
 var socket;
@@ -113,24 +113,12 @@ var message = new Vue({
                 }
                 else {
                     remarking[0] = true;
-                    remarking[1] += 1;
+                    remarking[1] += 2;
                     setTimeout(function() {
                         remarking[0] = false;
                     }, 30 * 1000);
                 }
             }
-
-            //if (remarking == 1 && m.length == 0) {
-            //    alert('台词蓄力中...');
-            //    return;
-            //}
-            //if (m.length == 0) {
-            //    remarking = 1;
-            //    // remarking reset
-            //    setTimeout(function() {
-            //        remarking = 0;
-            //    }, 30 * 1000);
-            //}
 
             if (urlRegex.test(m.toLowerCase()) || wordRegex.test(m.toLowerCase())) {
                 this.message = '';
@@ -165,7 +153,6 @@ var chat = new Vue({
 });
 
 // popin
-// Todo: change inner to popin ?
 $('#back-to-top').avgrund({
     width: 320,
     height: 315,
@@ -178,7 +165,7 @@ $('#back-to-top').avgrund({
         elem.fadeOut();
     },
     onLoaded: function () {
-        $('#active').text('现在有'+active+'个人類(๑•̀ㅂ•́)و✧');
+        $('#active').text('现在有'+active+'个包子(๑•̀ㅂ•́)و✧');
     },
     onUnload: function (elem) {
         elem.fadeIn();
@@ -189,8 +176,8 @@ $('#back-to-top').avgrund({
     '<p>次元崩坏: 每天PM6:30-PM11:35</p>' +
     '<p>无意义多开刷角色，刷屏的一律永封</p>' +
     '<p>催更，意见，技术讨论群331774726</p>' +
-    '<p class="text-danger">今日新增角色：兵长，折娘</p><br>' +
-    '<p id="active">现在有'+active+'个人類(๑•̀ㅂ•́)و✧</p>' +
+    '<p class="text-danger">开学较忙暂时停更</p><br>' +
+    '<p id="active">现在有'+active+'个包子(๑•̀ㅂ•́)و✧</p>' +
     '<div>' +
     '<a href="http://seeleit.com/" target="_blank" class="cross">作者主页</a>' +
     '</div>'
@@ -221,7 +208,7 @@ function emitMessage(m) {
 
 function coolingTime() {
     if (active <= 20) return 5;
-    else if (active >= 30) return 10;
+    //else if (active >= 30) return 10;
     else {
         return (active - 20) * 0.5 + 5;
     }
