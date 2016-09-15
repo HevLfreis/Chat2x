@@ -4,13 +4,16 @@
  * Time: 17:29
  */
 
-$('button').bind("touchstart", function(){}, true);
+$('button').bind("touchstart", function() {}, true);
 
 // Todo: linking server timeout
-var urlRegex = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/;
-var wordRegex = /(link)|(pan)|(share)|(baidu)|(magnet)|(傻逼)|(你妈)|(妈逼)|(操你)|(啪啪)/;
+var urlRegex = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w\-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/;
+var wordRegex = /(pan)|(share)|(baidu)|(magnet)|(傻逼)|(你妈)|(妈逼)|(操你)|(啪啪)/;
 
-// init socket
+/**
+ * socket.io events
+ */
+
 var socket;
 if (admin !== undefined && admin) {
     var pass = prompt("Pass");
@@ -51,6 +54,7 @@ socket.on('chat', function(msg) {
 
     if (msg.t.indexOf('sys') == -1)
         chat.items.unshift({
+                cid: msg.cid,
                 name: msg.name,
                 msg: msg.msg,
                 background: 'linear-gradient(to bottom, '+colorIndex[msg.cid][1]+' 50%, '+colorIndex[msg.cid][0]+' 50%)',
@@ -90,6 +94,11 @@ socket.on('offline', function(off) {
     }
 });
 
+
+/**
+ * vue models
+ */
+
 var message = new Vue({
     el: '.box-message-inner',
     data: {
@@ -107,7 +116,7 @@ var message = new Vue({
                     alert('台词蓄力中...');
                     return;
                 }
-                else if (remarking[1] == 1){
+                else if (remarking[1] > 0){
                     alert('发点别的吧...');
                     return;
                 }
@@ -141,6 +150,12 @@ var message = new Vue({
             else {
                 this.message = '';
             }
+        },
+        at: function() {
+            if (this.message.match(/@$/))
+                $('.img-avatar').addClass('at');
+            else
+                $('.img-avatar').removeClass('at');
         }
     }
 });
@@ -149,10 +164,18 @@ var chat = new Vue({
     el: '.box-talks',
     data: {
         items: []
+    },
+    methods: {
+        at: function(cid) {
+            console.log(cid)
+        }
     }
 });
 
-// popin
+/**
+ * popin
+ */
+
 $('#back-to-top').avgrund({
     width: 320,
     height: 315,
@@ -165,7 +188,7 @@ $('#back-to-top').avgrund({
         elem.fadeOut();
     },
     onLoaded: function () {
-        $('#active').text('现在有'+active+'个包子(๑•̀ㅂ•́)و✧');
+        $('#active').text(activeStr());
     },
     onUnload: function (elem) {
         elem.fadeIn();
@@ -176,15 +199,22 @@ $('#back-to-top').avgrund({
     '<p>次元崩坏: 每天PM6:30-PM11:35</p>' +
     '<p>无意义多开刷角色，刷屏的一律永封</p>' +
     '<p>催更，意见，技术讨论群331774726</p>' +
-    '<p class="text-danger">开学较忙暂时停更</p><br>' +
-    '<p id="active">现在有'+active+'个包子(๑•̀ㅂ•́)و✧</p>' +
+    '<p class="text-danger">今日更新：GUNDAM，男人的浪漫</p><br>' +
+    '<p id="active">'+activeStr()+'</p>' +
     '<div>' +
     '<a href="http://seeleit.com/" target="_blank" class="cross">作者主页</a>' +
     '</div>'
 });
 
+function activeStr() {
+    return '现在有'+active+'个NewType(๑•̀ㅂ•́)و✧';
+}
 
-// dom collecter
+
+/**
+ * dom collector
+ */
+
 setInterval(function() {
     if (chat.items.length > 100) {
         scrollTop();
@@ -193,7 +223,10 @@ setInterval(function() {
 }, 60 * 1000);
 
 
-// util functions
+/**
+ * util functions
+ */
+
 function colorLighter(rgb, percent) {
     return [parseInt(rgb[0] + (256 - rgb[0]) * percent / 100),
         parseInt(rgb[1] + (256 - rgb[1]) * percent / 100),

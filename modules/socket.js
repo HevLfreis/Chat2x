@@ -214,7 +214,5 @@ function cleanDeadSession(online) {
                 }
             }
         });
-        //console.log("online: ", online);
-        console.log("online: "+Object.keys(online).length);
     }, 1000 * 30)
 }

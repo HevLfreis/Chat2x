@@ -10,8 +10,8 @@ block content
       .row.box-message
         .col-md-6.col-md-offset-3.text-center
             .box-message-inner
-              textarea(v-model='message', v-on:keydown.enter.prevent='send')
-              button(v-on:click="send")= 'POST!'
+              textarea(v-model='message', @keydown.enter.prevent='send', v-on:input='at')
+              button(@click="send")= 'POST!'
 
   .container.box-chat
     .row
@@ -27,7 +27,7 @@ block content
                 .msg-system= '►► {{ item.name }} 被管理桑警告'
           template(v-else)
             .msg-default
-              .msg-user.text-center
+              .msg-user.text-center(@click="at(item.cid)")
                 .img-avatar(v-bind:style="{ background: item.avatar, backgroundSize: '55px 55px' }")
                 = '{{ item.name }}'
               .msg-bubble.bounce(v-bind:style="{ \

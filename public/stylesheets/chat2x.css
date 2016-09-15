@@ -127,6 +127,10 @@ a, a:hover, a:active, a:visited{
     margin: auto;
 }
 
+.img-avatar.at{
+    border: 3px solid #349aff;
+}
+
 .msg-bubble {
     max-width: 600px;
     display: inline-block;
