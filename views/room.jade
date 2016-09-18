@@ -27,8 +27,9 @@ block content
                 .msg-system= '►► {{ item.name }} 被管理桑警告'
           template(v-else)
             .msg-default
-              .msg-user.text-center(@click="at(item.cid)")
-                .img-avatar(v-bind:style="{ background: item.avatar, backgroundSize: '55px 55px' }")
+              .msg-user.text-center(@click='at(item.cid)')
+                .img-avatar(v-bind:class="{ 'at': atActive }", \
+                  v-bind:style="{ background: item.avatar, backgroundSize: '55px 55px' }")
                 = '{{ item.name }}'
               .msg-bubble.bounce(v-bind:style="{ \
                   background: item.background, color: item.color \

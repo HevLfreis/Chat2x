@@ -30,8 +30,8 @@ function Socket(srv) {
     });
 
     // online: online list { sessionid: [characterid, expires, ipaddr]... }
-    // socket2session: fix the multiple page of same session
-    const online = {}, socket2session = {};
+    // session2socket: fix the multiple page of same session
+    const online = {}, session2socket = {};
     cleanDeadSession(online);
 
     io.on('connection', function(socket) {
@@ -55,13 +55,13 @@ function Socket(srv) {
             admin = true;
         }
 
-        if (sid in socket2session) {
-            if (!_.contains(socket2session[sid], skid)) {
-                socket2session[sid].push(skid);
+        if (sid in session2socket) {
+            if (!_.contains(session2socket[sid], skid)) {
+                session2socket[sid].push(skid);
             }
         }
         else {
-            socket2session[sid] = [skid];
+            session2socket[sid] = [skid];
         }
 
         // join to the default room
@@ -69,8 +69,8 @@ function Socket(srv) {
         socket.join(room);
 
         // broadcast all the online cids ONLY to the new client
-        var infos = _.map(online, function(cid, sid) {
-            return { cid: cid[0], color: characters[cid[0]]['color']}
+        var infos = _.map(online, function(info, sid) {
+            return { cid: info[0], color: characters[info[0]]['color']}
         });
         socket.emit('info', infos);
 
@@ -90,8 +90,8 @@ function Socket(srv) {
         else {
 
             // map cid to a list
-            var onlineIndex = _.map(online, function(cid, sid) {
-                return cid[0];
+            var onlineIndex = _.map(online, function(info, sid) {
+                return info[0];
             });
 
             // reject cid already online, exclude admin
@@ -157,6 +157,20 @@ function Socket(srv) {
             io.to(room).emit('chat', { cid: cid, name: cname, msg: msg, t: ''});
         });
 
+
+        // at message
+        socket.on('at', function(ats){
+            var cid2socket = {};
+            _.each(online, function(info, sid) {
+                cid2socket[info[0]] = session2socket[sid];
+            });
+            _.each(ats, function(at) {
+                // Todo: wrong at no exception ???
+                if (at !== cid)
+                    io.to("/#" + cid2socket[at]).emit('at', cname);
+            });
+        });
+
         // Todo: fix
         socket.on('disconnect', function() {
             // if the connection doesn't contains cookie
@@ -166,7 +180,7 @@ function Socket(srv) {
             if ('connect.sid' in cookies) {
                 var expires = sess.cookie._expires;
                 //console.log(new Date(), expires);
-                if (new Date() >= expires) {
+                if (Date.now() >= expires) {
                     delete online[sid];
                     logger.info(formatter('disconnect', req, cid));
                     io.to(room).emit('chat', { name: cname, t: 'sysout'});
@@ -184,12 +198,12 @@ function Socket(srv) {
                 io.to(room).emit('chat', { name: cname, t: 'sysout'});
             }
 
-            // when a session is disconnect
+            // when a session is disconnected
             // we should disable all the sockets which share
             // the sessionid.
-            if (sid in socket2session) {
-                io.to(room).emit('offline', socket2session[sid]);
-                delete socket2session[sid];
+            if (sid in session2socket) {
+                io.to(room).emit('offline', session2socket[sid]);
+                delete session2socket[sid];
             }
 
             // emit active num to all clients
@@ -206,9 +220,9 @@ function formatter(act, req, cid) {
 
 function cleanDeadSession(online) {
     setInterval(function() {
-        _.each(online, function(cid, sid) {
-            if (cid[1] !== null) {
-                if (Date.now() > cid[1]) {
+        _.each(online, function(info, sid) {
+            if (info[1] !== null) {
+                if (Date.now() > info[1]) {
                     console.log('clean: ', sid);
                     delete online[sid];
                 }

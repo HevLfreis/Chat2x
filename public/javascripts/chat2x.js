@@ -4,12 +4,13 @@
  * Time: 17:29
  */
 
+
 $('button').bind("touchstart", function() {}, true);
 
 // Todo: linking server timeout
 var urlRegex = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w\-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/;
-var wordRegex = /(pan)|(share)|(baidu)|(magnet)|(傻逼)|(你妈)|(妈逼)|(操你)|(啪啪)/;
-
+var wordRegex = /(pan)|(share)|(baidu)|(magnet)|(傻逼)|(你妈)|(妈逼)|(操你)|(啪)/;
+var atRegex = /@(.*?)\s/g;
 /**
  * socket.io events
  */
@@ -27,21 +28,14 @@ else {
 // cooling status
 var colorIndex = [],
     cooling = false,
-    remarking = [false, 0],
+    remarking = [true, 0],
     active = 0;
 
-// Todo: fix width fixed when page return
-socket.on('name', function(name) {
-    var $btp = $('#back-to-top');
-    $btp.width('auto');
-    $btp.html('<span>连接到角色：'+name+'</span>');
+coolingRemark();
 
-    setTimeout(function() {
-        $btp.find('span').fadeOut();
-        $btp.animate({'width': 30}, 1000, function() {
-            $(this).html('<i class="fa fa-info"></i>');
-        });
-    }, 2500);
+
+socket.on('name', function(name) {
+    iShow('连接到角色：'+name)
 });
 
 //
@@ -87,6 +81,10 @@ socket.on('info', function(infos) {
     });
 });
 
+socket.on('at', function(at) {
+    iShow(at+'@了你');
+});
+
 //
 socket.on('offline', function(off) {
     if (off.indexOf(socket.id) != -1) {
@@ -109,25 +107,12 @@ var message = new Vue({
 
             if (cooling) return;
 
+            var $textarea = $('textarea');
+            //$textarea.focus();
+
             var m = this.message.trim().slice(0, 140);
 
-            if (m.length == 0) {
-                if (remarking[0]) {
-                    alert('台词蓄力中...');
-                    return;
-                }
-                else if (remarking[1] > 0){
-                    alert('发点别的吧...');
-                    return;
-                }
-                else {
-                    remarking[0] = true;
-                    remarking[1] += 2;
-                    setTimeout(function() {
-                        remarking[0] = false;
-                    }, 30 * 1000);
-                }
-            }
+            if (blankMsgCheck(m) != 0) return;
 
             if (urlRegex.test(m.toLowerCase()) || wordRegex.test(m.toLowerCase())) {
                 this.message = '';
@@ -135,27 +120,29 @@ var message = new Vue({
                 return;
             }
 
+            emitAtMessage(m);
+
             emitMessage(m);
 
             if (!admin) {
                 this.message = '阿姆斯特朗回旋加速喷气式阿姆斯特朗炮冷却中...';
-                $('textarea').attr('disabled', true);
+                $textarea.attr('disabled', true);
                 cooling = true;
                 setTimeout(function() {
                     message.message = '';
-                    $('textarea').attr('disabled', false);
+                    $textarea.attr('disabled', false);
                     cooling = false;
                 }, coolingTime() * 1000);
             }
             else {
                 this.message = '';
             }
+
+
         },
         at: function() {
-            if (this.message.match(/@$/))
-                $('.img-avatar').addClass('at');
-            else
-                $('.img-avatar').removeClass('at');
+            // null -> true -> false
+            chat.atActive = !!this.message.match(/@$/);
         }
     }
 });
@@ -163,11 +150,15 @@ var message = new Vue({
 var chat = new Vue({
     el: '.box-talks',
     data: {
-        items: []
+        items: [],
+        atActive: false
     },
     methods: {
         at: function(cid) {
-            console.log(cid)
+            if (this.atActive == false) return;
+            message.message += cid+' ';
+            this.atActive = false;
+            $("textarea").focus();
         }
     }
 });
@@ -198,8 +189,8 @@ $('#back-to-top').avgrund({
     '<p>发言有冷却时间，直接点POST发送角色台词</p>' +
     '<p>次元崩坏: 每天PM6:30-PM11:35</p>' +
     '<p>无意义多开刷角色，刷屏的一律永封</p>' +
-    '<p>催更，意见，技术讨论群331774726</p>' +
-    '<p class="text-danger">今日更新：GUNDAM，男人的浪漫</p><br>' +
+    '<p>意见，调教，讨论群331774726，欢迎新人</p>' +
+    '<p class="text-danger">今日更新:暗杀教室红蓝CP，@功能试运行</p><br>' +
     '<p id="active">'+activeStr()+'</p>' +
     '<div>' +
     '<a href="http://seeleit.com/" target="_blank" class="cross">作者主页</a>' +
@@ -207,7 +198,7 @@ $('#back-to-top').avgrund({
 });
 
 function activeStr() {
-    return '现在有'+active+'个NewType(๑•̀ㅂ•́)و✧';
+    return '现在还有'+active+'条触手';
 }
 
 
@@ -233,10 +224,59 @@ function colorLighter(rgb, percent) {
         parseInt(rgb[2] + (256 - rgb[2]) * percent / 100)]
 }
 
+function blankMsgCheck(msg) {
+    if (msg.length == 0) {
+        if (remarking[0]) {
+            alert('台词蓄力中...');
+            return 1;
+        }
+        else if (remarking[1] > 0){
+            alert('说点别的吧...');
+            return 1;
+        }
+        else {
+            remarking[0] = true;
+            remarking[1] += 2;
+            coolingRemark();
+            return 0;
+        }
+    }
+
+    return 0;
+}
+
+function emitAtMessage(msg) {
+    var ats = msg.match(atRegex);
+    if (ats) {
+        socket.emit('at', $.map(ats, function(at) {
+            return at.trim().slice(1);
+        }));
+    }
+}
+
 function emitMessage(m) {
     socket.emit('chat', m);
     if (remarking[1] > 0 && m.length != 0) remarking[1] -= 1;
     scrollTop();
+}
+
+function iShow(msg) {
+    var $btp = $('#back-to-top');
+    $btp.width('auto');
+    $btp.html('<span>'+msg+'</span>');
+
+    setTimeout(function() {
+        $btp.find('span').fadeOut();
+        $btp.animate({'width': 30}, 1000, function() {
+            $(this).html('<i class="fa fa-info"></i>');
+        });
+    }, 5000);
+}
+
+function coolingRemark() {
+    setTimeout(function() {
+        remarking[0] = false;
+    }, 30 * 1000);
 }
 
 function coolingTime() {

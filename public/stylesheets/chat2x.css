@@ -132,7 +132,7 @@ a, a:hover, a:active, a:visited{
 }
 
 .msg-bubble {
-    max-width: 600px;
+    max-width: 80%;
     display: inline-block;
     word-wrap:break-word;
     padding: 15px 20px;
