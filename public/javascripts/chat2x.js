@@ -5,12 +5,13 @@
  */
 
 
-$('button').bind("touchstart", function() {}, true);
+$('body').bind("touchstart", function() {}, true);
 
 // Todo: linking server timeout
-var urlRegex = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w\-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/;
-var wordRegex = /(pan)|(share)|(baidu)|(magnet)|(傻逼)|(你妈)|(妈逼)|(操你)|(啪)/;
-var atRegex = /@(.*?)\s/g;
+var urlRegex = /[A-Za-z0-9]*?\.?.+\.(com|net|cn|org|me)/;
+var wordRegex = /(pan|share|baidu|magnet|傻逼|你妈|妈逼|操你|啪|[0-9]{10,})/;
+var atRegex = /@([a-z0-9]*?)\s/g;
+
 /**
  * socket.io events
  */
@@ -35,7 +36,7 @@ coolingRemark();
 
 
 socket.on('name', function(name) {
-    iShow('连接到角色：'+name)
+    iShow('连接到角色：'+name, 5000)
 });
 
 //
@@ -82,7 +83,7 @@ socket.on('info', function(infos) {
 });
 
 socket.on('at', function(at) {
-    iShow(at+'@了你');
+    iShow(at+'@了你', 6000);
 });
 
 //
@@ -91,6 +92,11 @@ socket.on('offline', function(off) {
         socket.disconnect();
     }
 });
+
+//socket.on("disconnect", function(){
+//    console.log("Client disconnected from server");
+//    socket.disconnect();
+//});
 
 
 /**
@@ -120,7 +126,8 @@ var message = new Vue({
                 return;
             }
 
-            emitAtMessage(m);
+            // fix trim()
+            emitAtMessage(m+' ');
 
             emitMessage(m);
 
@@ -260,7 +267,7 @@ function emitMessage(m) {
     scrollTop();
 }
 
-function iShow(msg) {
+function iShow(msg, sec) {
     var $btp = $('#back-to-top');
     $btp.width('auto');
     $btp.html('<span>'+msg+'</span>');
@@ -270,7 +277,7 @@ function iShow(msg) {
         $btp.animate({'width': 30}, 1000, function() {
             $(this).html('<i class="fa fa-info"></i>');
         });
-    }, 5000);
+    }, sec);
 }
 
 function coolingRemark() {

@@ -13,12 +13,13 @@
 * 后端 nodejs+express+sockit.io+winston+mongodb 重写
 * 进入聊天室随机分配角色，聊天角色可配置
 * 根据头像自动生成聊天气泡颜色
+* 发言冷却，@XXX，简单的信息提醒
 
-## 参加角色（完成90/100+）
+## 参加角色（完成100+/100+）
 | **作品** | **人物** |
 | --- | --- |
-| ALDNOAH.ZERO | 界冢伊奈帆，斯雷因 |
 | Angel Beats | 立华奏 |
+| Clannad | 汐 |
 | EVA | 绫波丽，碇真嗣，渚薰 |
 | Fate | Saber，土狼，远坂凛，金闪闪，时辰 |
 | KON | 唯，梓喵，MIO |
@@ -31,15 +32,17 @@
 | 东方project | 魔理沙，紫妈，大小姐 |
 | 四月是你的谎言 | 公生，熏，友人A |
 | 叛逆的鲁路修 | 鲁路修，C.C. |
-| 高达Seed | 基神，阿斯兰，拉克丝 |
+| 高达 | 夏亚，阿姆罗 |
+| 高达Seed | 基神，阿斯兰，拉克丝，穆 |
 | 高达OO | 刹那，洛克昂 |
+| 数码宝贝 | 太一， 大和* |
 | 日常 | 博士，坂本先生 |
 | 死亡笔记 | L，月 |
 | 命运石之门 | 冈部伦太郎，助手，嘟嘟噜 |
 | 灼眼的夏娜 | 夏娜 |
-| 魔法少女小圆 | 小圆，qb，焰 |
+| 魔法少女小圆 | 小圆，qb，焰，学姐 |
 | 魔卡少女樱 | 樱 |
-| 魔法禁书目录 | 当嘛，Index，御坂美琴 |
+| 魔法禁书目录 | 当嘛，Index，御坂美琴，一方通行 |
 | 未闻花名 | 面码，仁太 |
 | 罪恶王冠 | 祈，集 |
 | 俺妹 | 三人组 |
@@ -54,12 +57,14 @@
 | 名侦探柯南 | 柯南，哀，兰 |
 | 食戟之灵 | 药王 |
 | 境界的彼方 | 栗山未来 |
-| 中华小当家 | 刘昂星 |
 | 在下坂本有何贵干 | 坂本 |
-| 暗杀教室 | 杀老师 |
-| 逆转裁判 | 成步堂 |
+| 暗杀教室 | 杀老师，潮田渚，赤羽业 |
+| 逆转裁判 | 成步堂龙一 |
 | 幸运星 | 泉此方 |
-| 其他 | 初音，洛天依, 乐正绫|
+| 夏目友人帐 | 夏目，猫老师 |
+| 笨蛋、测验、召唤兽 | 秀吉 |
+| 精灵宝可梦 | 皮卡丘 |
+| V家 | 初音，洛天依, 乐正绫 |
 | ... | ... |
 
 ***
@@ -78,6 +83,7 @@ Location: http://drrr.seeleit.com/
 * Rewrite back-end by nodejs+express+sockit.io+winston+mongodb
 * Random character when entering the chatroom, configurable character list
 * Auto-generated message bubble color from character avatar
+* cooling, @XXX, simple notifications
 
 ## How to use
 1. Install nodejs, npm and mongodb

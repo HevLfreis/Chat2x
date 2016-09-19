@@ -3,7 +3,7 @@ var router = express.Router();
 var moment = require('moment');
 var logger = require('../modules/logger');
 var characters = require('../modules/characters.js');
-var sched = require('../modules/schedule.js');
+var schedule = require('../modules/schedule.js');
 var util = require('../modules/util');
 
 
@@ -14,7 +14,7 @@ var start = moment('18-30', 'H-m'),
     now = moment();
 
 var page = (start<now&&now<end) ? { name: 'room' }:{ name: 'space' };
-sched(page);
+schedule(page);
 
 
 /* GET home page. */

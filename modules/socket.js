@@ -165,9 +165,10 @@ function Socket(srv) {
                 cid2socket[info[0]] = session2socket[sid];
             });
             _.each(ats, function(at) {
-                // Todo: wrong at no exception ???
-                if (at !== cid)
+                // Todo: wrong at some socket no exception ???
+                if (at !== cid) {
                     io.to("/#" + cid2socket[at]).emit('at', cname);
+                }
             });
         });
 

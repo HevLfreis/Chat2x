@@ -120,19 +120,23 @@
     "name": "Index",
     "remark": "当嘛，我肚子饿了o(≧口≦)o"
   },
+  "accelerator": {
+    "name": "一方通行",
+    "remark": "切，我才不喜欢什么LOLI"
+  },
   "subaru": {
     "name": "菜月昴",
-    "remark": "我叫菜月昂，是银发的半妖精，莉雅的骑士"
+    "remark": "帕特拉修，其实..."
   },
   "rem": {
     "name": "蕾姆",
     "remark": "真的，昴是个很过分的人呢",
-    "color": [141, 192, 253]
+    "color": [0, 220, 70]
   },
   "emt": {
     "name": "莉雅",
     "remark": "和管理桑新婚旅游中~~幸福.JPG",
-    "color": [0, 220, 70]
+    "color": [136, 102, 172]
   },
   "petelgeuse": {
     "name": "培提尔其乌斯",
@@ -198,6 +202,10 @@
   "gintoki": {
     "name": "坂田银时",
     "remark": "天然卷的家伙都是好人"
+  },
+  "elizabeth": {
+    "name": "伊丽莎白",
+    "remark": "（举牌）"
   },
   "asuna": {
     "name": "亚丝娜",
@@ -286,6 +294,11 @@
     "name": "阿虚",
     "remark": "诸君，我喜欢单马尾"
   },
+  "yuki": {
+    "name": "长门有希",
+    "remark": "",
+    "color": [128, 98, 117]
+  },
   "yukari": {
     "name": "八云紫",
     "remark": "我是八云紫，今年17岁"
@@ -328,7 +341,7 @@
     "name": "宇智波佐助",
     "remark": "呦，吊车尾（关爱智障的眼神）"
   },
-  "sakura2": {
+  "sakuran": {
     "name": "春野樱",
     "remark": "打爆你哦"
   },
@@ -389,5 +402,30 @@
     "name": "洛克昂",
     "remark": "洛克昂·史特拉托斯，瞄准狙击！",
     "color": [69, 103, 72]
+  },
+  "pikachu": {
+    "name": "皮卡丘",
+    "remark": "● PIKA PIKA ●"
+  },
+  "amuro": {
+    "name": "阿姆罗",
+    "remark": "你居然打我！连我爸爸都没打过我！"
+  },
+  "char": {
+    "name": "夏亚",
+    "remark": "必杀！红色有角三倍速",
+    "color": [169, 56, 62]
+  },
+  "ushio": {
+    "name": "汐",
+    "remark": "早苗说了，可以哭的地方只有厕所…还有就是…爸爸的怀里…"
+  },
+  "natsume": {
+    "name": "夏目",
+    "remark": "我想保护平常的日常生活，与我一起度过那样生活的人们"
+  },
+  "nekosensei": {
+    "name": "猫老师",
+    "remark": "人类真是麻烦的生物"
   }
 }

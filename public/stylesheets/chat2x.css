@@ -123,12 +123,33 @@ a, a:hover, a:active, a:visited{
 .img-avatar {
     width: 58px;
     height: 58px;
-    border: 3px solid #fff;
+    /*border: 3px solid #fff;*/
     margin: auto;
+    position: relative;
 }
 
-.img-avatar.at{
+.img-avatar:before {
+    content: '';
+    position: absolute;
+    border: 3px solid #fff;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.img-avatar.at:before {
+    content: '';
+    position: absolute;
     border: 3px solid #349aff;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.img-avatar.at:active{
+    top: 1px;
 }
 
 .msg-bubble {
@@ -207,7 +228,6 @@ a, a:hover, a:active, a:visited{
     text-decoration: none;
     -webkit-transition: background 0.3s ease;
     -moz-transition: background 0.3s ease;
-    -ms-transition: background 0.3s ease;
     -o-transition: background 0.3s ease;
     transition: background 0.3s ease;
     background: rgba(71, 186, 255, 0.8);
