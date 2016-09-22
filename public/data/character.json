@@ -427,5 +427,22 @@
   "nekosensei": {
     "name": "猫老师",
     "remark": "人类真是麻烦的生物"
+  },
+  "mashiro": {
+    "name": "椎名真白",
+    "remark": "呐,你想变成什么颜色?",
+    "color": [245, 245, 245]
+  },
+  "hiki": {
+    "name": "大老师",
+    "remark": "（敲黑板）记笔记了！"
+  },
+  "yukino": {
+    "name": "雪之下雪乃",
+    "remark": "将来某一天,你要来拯救我哦"
+  },
+  "yuigahama": {
+    "name": "由比滨结衣",
+    "remark": "把我的胸还给我 o(￣ヘ￣*)"
   }
 }

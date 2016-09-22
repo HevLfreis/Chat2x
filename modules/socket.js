@@ -51,7 +51,8 @@ function Socket(srv) {
         }
 
         // admin check
-        if (socket.handshake.query.pass === "12345678") {
+        var pass = socket.handshake.query.pass;
+        if (pass && /^12345678.*/.test(pass)) {
             admin = true;
         }
 
@@ -84,7 +85,10 @@ function Socket(srv) {
             logger.info(formatter('reconnect', req, cid));
         }
         else if (admin) {
-            cid = 'admin';
+            cid = pass.split('$')[1];
+            cid = (cid != '' && cid in characters && (!_.contains(_.map(online, function(info, sid) {
+                return info[0];
+            }), cid))) ? cid : 'admin';
             logger.info(formatter('admin', req, cid));
         }
         else {
@@ -164,7 +168,7 @@ function Socket(srv) {
             _.each(online, function(info, sid) {
                 cid2socket[info[0]] = session2socket[sid];
             });
-            _.each(ats, function(at) {
+            _.each(_.uniq(ats), function(at) {
                 // Todo: wrong at some socket no exception ???
                 if (at !== cid) {
                     io.to("/#" + cid2socket[at]).emit('at', cname);

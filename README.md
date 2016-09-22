@@ -14,6 +14,7 @@
 * 进入聊天室随机分配角色，聊天角色可配置
 * 根据头像自动生成聊天气泡颜色
 * 发言冷却，@XXX，简单的信息提醒
+* 角色捏他台词
 
 ## 参加角色（完成100+/100+）
 | **作品** | **人物** |
@@ -39,6 +40,7 @@
 | 日常 | 博士，坂本先生 |
 | 死亡笔记 | L，月 |
 | 命运石之门 | 冈部伦太郎，助手，嘟嘟噜 |
+| 春物 | 大老师，雪乃，团子 |
 | 灼眼的夏娜 | 夏娜 |
 | 魔法少女小圆 | 小圆，qb，焰，学姐 |
 | 魔卡少女樱 | 樱 |
@@ -57,6 +59,7 @@
 | 名侦探柯南 | 柯南，哀，兰 |
 | 食戟之灵 | 药王 |
 | 境界的彼方 | 栗山未来 |
+| 樱花庄的宠物女孩 | 椎名真白 |
 | 在下坂本有何贵干 | 坂本 |
 | 暗杀教室 | 杀老师，潮田渚，赤羽业 |
 | 逆转裁判 | 成步堂龙一 |
@@ -83,7 +86,8 @@ Location: http://drrr.seeleit.com/
 * Rewrite back-end by nodejs+express+sockit.io+winston+mongodb
 * Random character when entering the chatroom, configurable character list
 * Auto-generated message bubble color from character avatar
-* cooling, @XXX, simple notifications
+* Cooling, @XXX, simple notifications
+* Neta
 
 ## How to use
 1. Install nodejs, npm and mongodb

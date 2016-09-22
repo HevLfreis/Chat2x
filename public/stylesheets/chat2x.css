@@ -138,6 +138,10 @@ a, a:hover, a:active, a:visited{
     left: 0;
 }
 
+.img-avatar.at {
+    cursor: pointer;
+}
+
 .img-avatar.at:before {
     content: '';
     position: absolute;

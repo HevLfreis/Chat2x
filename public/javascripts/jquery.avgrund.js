@@ -111,8 +111,8 @@
                 }
 
                 body.bind('keyup', onDocumentKeyup)
-                    .bind('click', onDocumentClick);
-
+                    .bind('click', onDocumentClick)
+                    .bind('touchstart', onDocumentClick);
             }
 
             function deactivate () {

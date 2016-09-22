@@ -16,7 +16,6 @@ var start = moment('18-30', 'H-m'),
 var page = (start<now&&now<end) ? { name: 'room' }:{ name: 'space' };
 schedule(page);
 
-
 /* GET home page. */
 router.get('/', function(req, res, next) {
     logger.info(util.formatter('access', req));

@@ -5,7 +5,7 @@
  */
 
 
-$('body').bind("touchstart", function() {}, true);
+$('body').bind("touchstart", function() {});
 
 // Todo: linking server timeout
 var urlRegex = /[A-Za-z0-9]*?\.?.+\.(com|net|cn|org|me)/;
@@ -165,6 +165,7 @@ var chat = new Vue({
             if (this.atActive == false) return;
             message.message += cid+' ';
             this.atActive = false;
+            scrollTop();
             $("textarea").focus();
         }
     }
@@ -197,7 +198,7 @@ $('#back-to-top').avgrund({
     '<p>次元崩坏: 每天PM6:30-PM11:35</p>' +
     '<p>无意义多开刷角色，刷屏的一律永封</p>' +
     '<p>意见，调教，讨论群331774726，欢迎新人</p>' +
-    '<p class="text-danger">今日更新:暗杀教室红蓝CP，@功能试运行</p><br>' +
+    '<p class="text-danger">角色100突破！！！</p><br>' +
     '<p id="active">'+activeStr()+'</p>' +
     '<div>' +
     '<a href="http://seeleit.com/" target="_blank" class="cross">作者主页</a>' +
@@ -205,7 +206,7 @@ $('#back-to-top').avgrund({
 });
 
 function activeStr() {
-    return '现在还有'+active+'条触手';
+    return '现在还有'+active+'个团子';
 }
 
 
