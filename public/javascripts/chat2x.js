@@ -131,19 +131,20 @@ var message = new Vue({
 
             emitMessage(m);
 
-            if (!admin) {
-                this.message = '阿姆斯特朗回旋加速喷气式阿姆斯特朗炮冷却中...';
-                $textarea.attr('disabled', true);
-                cooling = true;
-                setTimeout(function() {
-                    message.message = '';
-                    $textarea.attr('disabled', false);
-                    cooling = false;
-                }, coolingTime() * 1000);
-            }
-            else {
-                this.message = '';
-            }
+            //if (!admin) {
+            //    this.message = '阿姆斯特朗回旋加速喷气式阿姆斯特朗炮冷却中...';
+            //    $textarea.attr('disabled', true);
+            //    cooling = true;
+            //    setTimeout(function() {
+            //        message.message = '';
+            //        $textarea.attr('disabled', false);
+            //        cooling = false;
+            //    }, coolingTime() * 1000);
+            //}
+            //else {
+            //    this.message = '';
+            //}
+            this.message = ''
 
 
         },
@@ -206,7 +207,7 @@ $('#back-to-top').avgrund({
 });
 
 function activeStr() {
-    return '现在还有'+active+'个团子';
+    return '现在还有'+active+'个笛子在吹 (⊙ˍ⊙)';
 }
 
 

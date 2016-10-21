@@ -17,11 +17,11 @@ block content
     .row
       .col-md-8.col-md-offset-2.box-talks
         template(v-for='item in items')
-          template(v-if=' item.t.indexOf("sys") != -1 ')
-            template(v-if=' item.t === "sysin" ')
+          template(v-if=" item.t.indexOf('sys') != -1 ")
+            template(v-if=" item.t === 'sysin' ")
               .msg-system= '►► {{ item.name }} さんが入室しました'
             template(v-else)
-              template(v-if=' item.t === "sysout" ')
+              template(v-if=" item.t === 'sysout' ")
                 .msg-system= '►► {{ item.name }} さんが退室しました'
               template(v-else)
                 .msg-system= '►► {{ item.name }} 被管理桑警告'

@@ -15,11 +15,7 @@ var characters = require('./characters.js');
 
 module.exports = Socket;
 
-// Todo: Socket.IO Authentication, sessionid
-// Todo: multiple same page, disconnect one , others ?
-// Todo: date.now and new date()
-// Todo: admin enter
-// Todo: nginx pass limit
+
 function Socket(srv) {
 
     var io = socket(srv);
@@ -146,7 +142,7 @@ function Socket(srv) {
                 msg = msg.slice(0, 140);
 
                 // save msg to db
-                var histroy = new Message({
+                var history = new Message({
                     sid: sid,
                     cid: cid,
                     ipaddr: ipaddr,
@@ -154,7 +150,7 @@ function Socket(srv) {
                     msg: msg,
                     timestamp: Date.now()
                 });
-                histroy.save();
+                history.save();
             }
 
             // emit the msg to all clients

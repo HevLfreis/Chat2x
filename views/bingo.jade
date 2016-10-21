@@ -21,9 +21,8 @@ block content
             .msg-user.text-center
               .img-avatar(v-bind:style="{ background: item.avatar, backgroundSize: '58px 58px' }")
               = '{{ item.name }}'
-            .msg-bubble.bounce(v-bind:style="{ \
-                background: item.background \
-              }")= '{{ item.msg }}'
+            .msg-bubble.bounce(v-bind:style="{ background: item.background }")
+              = '{{ item.msg }}'
 
 block script
   script(src='/javascripts/jquery.min.js')
