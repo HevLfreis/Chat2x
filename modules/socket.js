@@ -130,7 +130,7 @@ function Socket(srv) {
                 msg = characters[cid]['remark'];
             }
             else if (admin && msg.lastIndexOf('admin$', 0) === 0) {
-                var warn= msg.split('$')[1].trim();
+                var warn = msg.split('$')[1].trim();
                 if (_.contains(Object.keys(characters), warn)) {
                     io.to(room).emit('chat', { name: characters[warn]['name'], t: 'syswarn'});
                 }

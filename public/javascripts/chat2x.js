@@ -131,20 +131,22 @@ var message = new Vue({
 
             emitMessage(m);
 
-            //if (!admin) {
-            //    this.message = '阿姆斯特朗回旋加速喷气式阿姆斯特朗炮冷却中...';
-            //    $textarea.attr('disabled', true);
-            //    cooling = true;
-            //    setTimeout(function() {
-            //        message.message = '';
-            //        $textarea.attr('disabled', false);
-            //        cooling = false;
-            //    }, coolingTime() * 1000);
-            //}
-            //else {
-            //    this.message = '';
-            //}
-            this.message = ''
+            if (!admin) {
+                this.message = '阿姆斯特朗回旋加速喷气式阿姆斯特朗炮冷却中...';
+                $textarea.attr('disabled', true);
+                cooling = true;
+                setTimeout(function() {
+                    message.message = '';
+                    $textarea.attr('disabled', false);
+                    cooling = false;
+                }, 1000);
+            }
+            else {
+                this.message = '';
+            }
+
+            // when there is no cooling
+            //this.message = ''
 
 
         },
@@ -196,10 +198,10 @@ $('#back-to-top').avgrund({
     template: '<h3><strong>Chat2x</strong>: 次元聊天室</h3>' +
     '<p>随机分配动漫角色，两分钟后刷新更换</p>' +
     '<p>发言有冷却时间，直接点POST发送角色台词</p>' +
-    '<p>次元崩坏: 每天PM6:30-PM11:35</p>' +
+    '<p>次元崩坏: 每天PM5:30-PM11:35</p>' +
     '<p>无意义多开刷角色，刷屏的一律永封</p>' +
     '<p>意见，调教，讨论群331774726，欢迎新人</p>' +
-    '<p class="text-danger">角色100突破！！！</p><br>' +
+    '<p class="text-danger">更新魔法篮球，小排球</p><br>' +
     '<p id="active">'+activeStr()+'</p>' +
     '<div>' +
     '<a href="http://seeleit.com/" target="_blank" class="cross">作者主页</a>' +
@@ -207,7 +209,7 @@ $('#back-to-top').avgrund({
 });
 
 function activeStr() {
-    return '现在还有'+active+'个笛子在吹 (⊙ˍ⊙)';
+    return '现在还有'+active+'个排球 (ಥ_ಥ)';
 }
 
 

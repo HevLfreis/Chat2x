@@ -9,12 +9,20 @@ var util = require('../modules/util');
 
 var title = 'Chat2x | 次元聊天室';
 
-var start = moment('18-30', 'H-m'),
+var start = moment('17-30', 'H-m'),
     end = moment('23-35', 'H-m'),
+    sats = moment('6-30', 'H-m'),
+    sate = moment('23-59', 'H-m'),
     now = moment();
 
-var page = (start<now&&now<end) ? { name: 'room' }:{ name: 'space' };
+var page;
+if (now.weekday() != 6)
+     page = (start<now&&now<end) ? { name: 'room' }:{ name: 'space' };
+else
+     page = (sats<now&&now<sate) ? { name: 'room' }:{ name: 'space' };
+
 schedule(page);
+//page = { name: 'room' };
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
