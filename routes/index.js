@@ -16,13 +16,13 @@ var start = moment('17-30', 'H-m'),
     now = moment();
 
 var page;
-if (now.weekday() != 6)
-     page = (start<now&&now<end) ? { name: 'room' }:{ name: 'space' };
-else
-     page = (sats<now&&now<sate) ? { name: 'room' }:{ name: 'space' };
-
-schedule(page);
-//page = { name: 'room' };
+//if (now.weekday() != 6)
+//     page = (start<now&&now<end) ? { name: 'room' }:{ name: 'space' };
+//else
+//     page = (sats<now&&now<sate) ? { name: 'room' }:{ name: 'space' };
+//
+//schedule(page);
+page = { name: 'room' };
 
 /* GET home page. */
 router.get('/', function(req, res, next) {

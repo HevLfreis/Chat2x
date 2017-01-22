@@ -24,7 +24,10 @@ block content
               template(v-if=" item.t === 'sysout' ")
                 .msg-system= '►► {{ item.name }} さんが退室しました'
               template(v-else)
-                .msg-system= '►► {{ item.name }} 被管理桑警告'
+                template(v-if=" item.t === 'syswarn' ")
+                  .msg-system= '►► {{ item.name }} 被管理桑警告'
+                template(v-else)
+                  .msg-system= '►► 欢迎来到崩坏的次元裂缝，查看更多请点右下小绿(≧∇≦)/'
           template(v-else)
             .msg-default
               .msg-user.text-center(@click='at(item.cid)')

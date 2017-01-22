@@ -70,6 +70,7 @@ function Socket(srv) {
             return { cid: info[0], color: characters[info[0]]['color']}
         });
         socket.emit('info', infos);
+        socket.emit('chat', { t: 'sysnotice'});
 
         // sample a random cid to the user
         // if there's no cid to use, use 'a'(Friend A)
